@@ -4,8 +4,8 @@
 target 'MovieDB' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Alamofire'
-  pod 'Kingfisher'
+  pod 'Alamofire', '~> 5.10.2'
+  pod 'Kingfisher', '~> 8.6.0'
   
 end
 
