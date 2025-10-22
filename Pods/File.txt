@@ -1,2 +1,0 @@
-pod 'Alamofire', '~> 5.5'
-pod 'Kingfisher', '~> 7.2'
