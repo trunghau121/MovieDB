@@ -1,0 +1,26 @@
+//
+//  Staging.xcconfig
+//  MovieDB
+//
+//  Created by 60156720 on 10/15/25.
+//
+
+// Staging.xcconfig
+// Server URL
+BASE_URL = http:/$()/movidedb.staging.com
+
+// Keys
+API_KEY = 89dhdyd93380dkqmoe_hd830dhq
+
+// App Settings
+APP_NAME = MovieDB (STAGING)
+APP_BUNDLE_ID = com.MovieDB.Staging
+
+// app icon
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconStaging
+// app version
+MARKETING_VERSION = 1.0.0
+// build number
+CURRENT_PROJECT_VERSION = 1
+
+#include "Pods/Target Support Files/Pods-MovieDB/Pods-MovieDB.staging.xcconfig"

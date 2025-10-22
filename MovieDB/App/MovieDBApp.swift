@@ -2,7 +2,7 @@
 //  MovieDBApp.swift
 //  MovieDB
 //
-//  Created by 60156720 on 10/22/25.
+//  Created by 60156720 on 10/21/25.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct MovieDBApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
