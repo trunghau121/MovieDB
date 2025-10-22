@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//import Kingfisher
+import Kingfisher
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
@@ -15,7 +15,6 @@ struct HomeView: View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
-                .foregroundStyle(.tint)
             Text("API Key: \(viewModel.apiKey) \n Base Url: \(viewModel.baseUrl)")
         }
         .padding()
