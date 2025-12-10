@@ -7,16 +7,30 @@
 
 import Foundation
 
-public extension URLRequest {
-    mutating func postMethod() {
-        self.httpMethod = HttpMethod.POST.rawValue
-    }
-    
-    mutating func getMethod() {
-        self.httpMethod = HttpMethod.GET.rawValue
-    }
-        
-    mutating func addHeaderApp() {
-        self.addValue("application/json", forHTTPHeaderField: "Content-Type")
+extension URLRequest {
+    func debugDescription() -> String {
+        var lines: [String] = []
+        lines.append("--------------- REQUEST ---------------")
+        lines.append("URL: \(self.url?.absoluteString ?? "nil")")
+        lines.append("Method: \(self.httpMethod ?? "nil")")
+        // Headers
+        if let headers = self.allHTTPHeaderFields, !headers.isEmpty {
+            lines.append("Headers:")
+            for (key, value) in headers {
+                lines.append("  \(key): \(value)")
+            }
+        } else {
+            lines.append("Headers: none")
+        }
+        // Body
+        if let body = self.httpBody,
+           let jsonString = String(data: body, encoding: .utf8) {
+            lines.append("Body:")
+            lines.append(jsonString)
+        } else {
+            lines.append("Body: none")
+        }
+        lines.append("------------------------------------------")
+        return lines.joined(separator: "\n")
     }
 }

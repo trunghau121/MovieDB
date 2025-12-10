@@ -6,25 +6,33 @@
 //
 
 import Foundation
+import Combine
+
+enum NaviagionEvent {
+    case openDetail(movieId: Int)
+}
 
 @MainActor
-class HomeViewModel: ObservableObject {
-    @Published var apiKey: String = ""
-    @Published var baseUrl: String = ""
+class HomeViewModel: BaseViewModel<NaviagionEvent> {
+    @Published var trending: [Movie] = []
+    var repository: MovieRepositoryImp
+    var trendingUseCase: TrendingUseCase
     
-    init() {
-        Task {
-            await getData()
-        }
+    override init() {
+        repository = MovieRepositoryImp()
+        trendingUseCase = TrendingUseCase(repository: repository)
     }
     
-    func getData() async {
-        do {
-            try await Task.sleep(nanoseconds: 3_000_000_000)
-        } catch {}
-        
-        apiKey = Enviroment.apiKey
-        baseUrl = Enviroment.baseUrl
+    func loadTrending() {
+        performAsyn(
+            operation: { try await self.trendingUseCase.execute(language: "en") },
+            onSuccess: { results in
+                self.trending = results
+            }
+        )
     }
     
+    func didSelect(_ movieId: Int) {
+        navigate(.openDetail(movieId: movieId))
+    }
 }

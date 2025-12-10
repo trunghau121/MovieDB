@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public struct Movie: Codable {
+public struct MovieDTO: Codable {
     var id: Int?
     var title: String?
     var backdropPath: String?

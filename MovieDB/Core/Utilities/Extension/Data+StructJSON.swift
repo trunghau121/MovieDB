@@ -12,11 +12,4 @@ public extension Data {
         let invalidJson = "invalid JSON"
         return String(data: self, encoding: String.Encoding.utf8) ?? invalidJson
     }
-    
-    var jsonLog: String {
-        var jsonString = self.json
-        jsonString = jsonString.decodeUrl()
-        jsonString = jsonString.replacingOccurrences(of: "\\/", with: "/")
-        return jsonString
-    }
 }

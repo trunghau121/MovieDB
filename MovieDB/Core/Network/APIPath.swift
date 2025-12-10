@@ -29,6 +29,7 @@ public extension APIPath {
         components?.queryItems = queryItems
         return components?.url
     }
+    
     func createURLRequest(
         httpMethod: HttpMethod,
         params: [String: String?] = [:]
@@ -40,7 +41,7 @@ public extension APIPath {
         urlRequest.httpMethod = httpMethod.rawValue
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        Logger.log("\(urlRequest.url?.absoluteString ?? "Can't create url")", logType: .Info)
+        
         return urlRequest
     }
 }

@@ -5,8 +5,7 @@
 //  Created by 60156720 on 10/24/25.
 //
 
-import SwiftUICore
-import UIKit
+import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var imageLoader: ImageLoader

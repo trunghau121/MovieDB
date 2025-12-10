@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct HomeView: View {
+struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
@@ -62,5 +62,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeScreen()
 }

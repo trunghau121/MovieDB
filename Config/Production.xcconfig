@@ -6,11 +6,15 @@
 //
 
 // Production.xcconfig
-// Server URL
-BASE_URL = http:/$()/movidedb.production.com
+// API URL
+BASE_URL = https:/$()/api.themoviedb.org/3/
 
 // Keys
-API_KEY = 9ud0930djd_md9zdjdko3830lb0d
+API_KEY = 2472f33b26e67da5bb1456ffa226d78a
+
+// Photo URL
+PHOTO_500_URL = https:/$()/image.tmdb.org/t/p/w500
+PHOTO_200_URL = https:/$()/image.tmdb.org/t/p/w200
 
 // App Settings
 APP_NAME = MovieDB (PRODUCT)
