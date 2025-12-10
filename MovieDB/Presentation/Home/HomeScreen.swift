@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
