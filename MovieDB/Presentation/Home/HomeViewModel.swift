@@ -8,12 +8,8 @@
 import Foundation
 import Combine
 
-enum NaviagionEvent {
-    case openDetail(movieId: Int)
-}
-
 @MainActor
-class HomeViewModel: BaseViewModel<NaviagionEvent> {
+class HomeViewModel: BaseViewModel<HomeNavigationEvent> {
     @Published var trending: [Movie] = []
     var repository: MovieRepositoryImp
     var trendingUseCase: TrendingUseCase

@@ -46,7 +46,7 @@ struct RemoteImageApp: View {
         
         var body: some View {
             Group {
-                if #available(macCatalyst 15.0, *) {
+                if #available(macCatalyst 15.0, *), #available(iOS 15.0, *) {
                     AsyncImage(url: url) { image in
                         image
                             .resizable()

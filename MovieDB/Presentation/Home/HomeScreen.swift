@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
+    @EnvironmentObject var router: NavigationRouter
     
     var body: some View {
         ZStack {
@@ -28,6 +29,7 @@ struct HomeScreen: View {
         .toast(item: $viewModel.toast) { toast in
             Text(toast.message).padding()
         }
+        .navigationBarBackButtonHidden(false)
         .padding()
     }
     
@@ -51,10 +53,11 @@ struct HomeScreen: View {
     }
     
     
-    private func handleNavigation(_ event: NaviagionEvent) {
+    private func handleNavigation(_ event: HomeNavigationEvent) {
         switch event {
         case .openDetail(let movieId):
-            // Move screen
+            // Move to Detail screen
+            router.push(DetailScreen(movieId: movieId))
             break
         }
     }
