@@ -10,7 +10,7 @@ import SwiftUICore
 import SwiftUI
 
 struct RootScreen: View {
-    @StateObject var router = NavigationRouter()
+    @StateObject var router = NavigationRouter.shared
     
     var body: some View {
         NavigationView {
@@ -33,7 +33,6 @@ struct RootScreen: View {
                 ) {
                     EmptyView()
                 }
-                
             }
         }
     }

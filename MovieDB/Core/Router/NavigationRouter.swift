@@ -9,6 +9,7 @@ import Foundation
 import SwiftUICore
 
 final class NavigationRouter: ObservableObject {
+    public static let shared = NavigationRouter()
     @Published var stask: [AnyView] = []
     
     func push<V: View>(_ view: V) {

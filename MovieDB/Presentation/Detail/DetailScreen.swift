@@ -18,7 +18,9 @@ struct DetailScreen: View {
 
     var body: some View {
         ZStack {
-            Text("Detail Screen: \(movieId)").font(.largeTitle).padding()
+            Text("Detail Screen: \(movieId)")
+                .font(.largeTitle)
+                .padding()
         }
     }
 }

@@ -10,11 +10,25 @@ import SwiftUI
 struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
     @EnvironmentObject var router: NavigationRouter
+    @State var presentSlideMenu = false
+    @State var selectedSlideMenu = -1
     
     var body: some View {
         ZStack {
-            // Content
-            content
+            VStack {
+                // Header
+                HomeHeader {
+                    presentSlideMenu.toggle()
+                }
+                .padding(.horizontal, 24)
+                // Content
+                content
+            }
+            // Slide Menu
+            SlideMenu(
+                isShowing: $presentSlideMenu,
+                content: AnyView(SlideMenuView(selectedTabMenu: $selectedSlideMenu, presentSlideMenu: $presentSlideMenu))
+            )
             // Loading
             if viewModel.isLoading {
                 Loading()
@@ -29,22 +43,30 @@ struct HomeScreen: View {
         .toast(item: $viewModel.toast) { toast in
             Text(toast.message).padding()
         }
-        .navigationBarBackButtonHidden(false)
-        .padding()
     }
     
     @ViewBuilder
     var content: some View {
+        let containerWidth: CGFloat = UIScreen.main.bounds.width - 32.0
         List(viewModel.trending, id: \.id) { movie in
             HStack {
                 RemoteImageApp(
                     url: movie.backdropPath,
-                    size: .init(width: 200, height: 200)
+                    size: .init(
+                        width: containerWidth * 0.35,
+                        height: containerWidth * 0.35
+                    )
                 )
+                .background(Color.gray)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                
                 VStack(alignment: .leading) {
-                    Text(movie.title).font(.title)
+                    Text(movie.title).font(.title2)
                     Text(movie.overview)
+                        .lineLimit(2)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
                 }
+                .frame(width: containerWidth * 0.60)
             }
             .onTapGesture {
                 viewModel.didSelect(movie.id)
@@ -62,6 +84,7 @@ struct HomeScreen: View {
         }
     }
 }
+
 
 #Preview {
     HomeScreen()

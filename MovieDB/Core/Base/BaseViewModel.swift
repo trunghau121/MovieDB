@@ -69,7 +69,28 @@ class BaseViewModel<NavEvent>: ObservableObject {
             onSuccess: onSuccess,
             onError: { error in
                 if showErrorToast {
-                    self.showToast(message: error.localizedDescription, style: .error)
+                    var message: String
+                    switch error {
+                    case APIError.unknown(let err):
+                        message = err.localizedDescription
+                        break
+                    case APIError.decodingError(let err):
+                        message = err.localizedDescription
+                        break
+                    case APIError.httpStatusCode(_, let content):
+                        message = content?.json ?? "Error from Server. Please check again!"
+                        break
+                    case APIError.invalidResponse:
+                        message = "The response is invalid"
+                        break
+                    case APIError.invalidURL:
+                        message = "The URL is invalid"
+                        break
+                    default:
+                        message = "Something wrong, please try again!"
+                    }
+                    
+                    self.showToast(message: message, style: .error)
                 }
             }
         )

@@ -62,10 +62,10 @@ final class APIClient {
                 throw APIError.decodingError(error)
             }
         } catch let error as APIError {
-            Logger.log("Error: \(error.localizedDescription)", logType: .Error)
+            Logger.log("Error APIError: \(error.localizedDescription)", logType: .Error)
             throw error
         } catch {
-            Logger.log("Error: \(error.localizedDescription)", logType: .Error)
+            Logger.log("Error APIError 2: \(error.localizedDescription)", logType: .Error)
             throw APIError.unknown(error)
         }
     }
