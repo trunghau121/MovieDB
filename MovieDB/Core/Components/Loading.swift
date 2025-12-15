@@ -20,7 +20,9 @@ struct Loading: View {
                 .tint(Color.black)
                 .foregroundStyle(.black)
         } else {
-            // Fallback on earlier versions
+            ProgressView(text)
+                .accentColor(Color.black)
+                .foregroundColor(.black)
         }
     }
 }
