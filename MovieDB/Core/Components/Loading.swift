@@ -15,6 +15,12 @@ struct Loading: View {
     }
     
     var body: some View {
-        ProgressView(text)
+        if #available(iOS 16.0, *) {
+            ProgressView(text)
+                .tint(Color.black)
+                .foregroundStyle(.black)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

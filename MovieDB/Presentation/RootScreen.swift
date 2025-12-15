@@ -13,28 +13,32 @@ struct RootScreen: View {
     @StateObject var router = NavigationRouter.shared
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                // Home screen
-                HomeScreen()
-                .environmentObject(router)
-                
-                // Handle push screen
-                NavigationLink(
-                    destination: nextView,
-                    isActive: Binding(
-                        get: { !router.stask.isEmpty },
-                        set: { isActive in
-                            if !isActive {
-                                router.pop()
+        RootContainerView {
+            NavigationView {
+                ZStack {
+                    // Home screen
+                    HomeScreen()
+                        .environmentObject(router)
+                        .systemBarStyle(AppBarStyle.defaultStyle)
+                    
+                    // Handle push screen
+                    NavigationLink(
+                        destination: nextView,
+                        isActive: Binding(
+                            get: { !router.stask.isEmpty },
+                            set: { isActive in
+                                if !isActive {
+                                    router.pop()
+                                }
                             }
-                        }
-                    )
-                ) {
-                    EmptyView()
+                        )
+                    ) {
+                        EmptyView()
+                    }
                 }
             }
         }
+        .preferredColorScheme(.light)
     }
     
     private var nextView: some View {
