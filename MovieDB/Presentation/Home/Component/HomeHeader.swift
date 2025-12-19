@@ -21,10 +21,16 @@ struct HomeHeader: View {
             } label: {
                 Image(AppIcon.menu)
                     .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
                     .frame(width: 32, height: 32)
+                    .shadow(radius: 5, x: 5, y: 5)
             }
             Spacer()
             Text("Home")
+                .bold()
+                .foregroundColor(.white)
+                .shadow(radius: 5, x: 5, y: 5)
             Spacer()
         }
     }

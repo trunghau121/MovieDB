@@ -56,21 +56,20 @@ struct SlideMenuView: View {
             action()
         } label: {
             VStack(alignment: .leading) {
-                HStack (spacing: 20) {
+                HStack (spacing: 0) {
                     Rectangle()
                         .fill(isSelected ? .purple : .white)
                         .frame(width: 5)
                     
                     ZStack {
-                        Image(icon)
-                            .resizable()
-                            .renderingMode(.template)
+                        Image(systemName: icon)
+                            .scaledToFit()
                             .foregroundColor(isSelected ? .black : .gray)
-                            .frame(width: 26, height: 26)
+                            .frame(width: 30, height: 30)
                     }
-                    .frame(width: 30, height: 30)
+                    .frame(width: 50, height: 30)
                     
-                    Text(title)
+                    Text(title.localized())
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(isSelected ? .black : .gray)
                     

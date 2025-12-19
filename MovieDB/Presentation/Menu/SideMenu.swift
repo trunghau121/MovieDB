@@ -11,7 +11,7 @@ struct SlideMenu: View {
     @Binding var isShowing: Bool
     var content: AnyView
     var edgeTransaction: AnyTransition = .move(edge: .leading)
-
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             if isShowing {

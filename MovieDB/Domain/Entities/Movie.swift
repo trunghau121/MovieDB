@@ -5,7 +5,7 @@
 //  Created by 60156720 on 12/10/25.
 //
 
-public struct Movie {
+public struct Movie: Identifiable {
     public let id: Int
     public let title: String
     public let backdropPath: String

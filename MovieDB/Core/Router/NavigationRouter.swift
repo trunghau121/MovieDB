@@ -8,20 +8,21 @@
 import Foundation
 import SwiftUICore
 
+@MainActor
 final class NavigationRouter: ObservableObject {
     public static let shared = NavigationRouter()
-    @Published var stask: [AnyView] = []
+    @Published var path: [AnyRoute] = []
     
-    func push<V: View>(_ view: V) {
+    func push<V: AppRoute>(_ route: V) {
         withAnimation {
-            stask.append(AnyView(view))
+            path.append(AnyRoute(route))
         }
     }
     
     func pop() {
         withAnimation {
-            if !stask.isEmpty {
-                stask.removeLast()
+            if !path.isEmpty {
+                path.removeLast()
             }
         }
     }

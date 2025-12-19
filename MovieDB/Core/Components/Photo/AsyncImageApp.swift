@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct RemoteImageApp: View {
+struct AsyncImageApp: View {
     let url: String
     let size: CGSize
     
@@ -24,7 +24,7 @@ struct RemoteImageApp: View {
                 placeholder
             }
         }
-        .frame(width: size.width, height: size.height)
+        .frame(maxWidth: size.width, maxHeight: size.height)
     }
     
     @ViewBuilder

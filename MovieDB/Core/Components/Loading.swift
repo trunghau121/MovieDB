@@ -15,14 +15,15 @@ struct Loading: View {
     }
     
     var body: some View {
-        if #available(iOS 16.0, *) {
+        ZStack {
             ProgressView(text)
-                .tint(Color.black)
-                .foregroundStyle(.black)
-        } else {
-            ProgressView(text)
-                .accentColor(Color.black)
-                .foregroundColor(.black)
+                .tint(Color.white)
+                .foregroundStyle(.white)
         }
+        .padding(20)
+        .background(Color.vulcan.opacity(0.5))
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .disabled(true)
     }
 }
