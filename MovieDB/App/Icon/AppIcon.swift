@@ -7,9 +7,10 @@
 
 public struct AppIcon {
     static let horizontalLogo = "horizontal_logo"
+    static let home = "house"
     static let favorite = "heart.fill"
-    static let language = "book.circle.fill"
+    static let settings = "gearshape.fill"
     static let feedback = "exclamationmark.triangle.fill"
-    static let about = "info.circle.fill"
+    static let about = "questionmark.circle"
     static let menu = "menu"
 }

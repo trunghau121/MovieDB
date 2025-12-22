@@ -8,7 +8,8 @@
 public struct AppText {
     static let unknownError = "unknown_error"
     static let aboutMenu = "about_menu"
-    static let languageMenu = "language_menu"
+    static let homeMenu = "home_menu"
+    static let settingMenu = "setting_menu"
     static let invalidResponse = "invalid_response"
     static let invalidURL = "invalid_url"
     static let feedbackMenu = "feedback_menu"

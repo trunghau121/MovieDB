@@ -55,8 +55,22 @@
         }
       }
     },
-    "Home" : {
-
+    "home_menu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trang chủ"
+          }
+        }
+      }
     },
     "invalid_response" : {
       "extractionState" : "manual",
@@ -92,19 +106,19 @@
         }
       }
     },
-    "language_menu" : {
+    "setting_menu" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Settings"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ngôn ngữ"
+            "value" : "Cài đặt"
           }
         }
       }

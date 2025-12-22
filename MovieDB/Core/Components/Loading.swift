@@ -17,11 +17,11 @@ struct Loading: View {
     var body: some View {
         ZStack {
             ProgressView(text)
-                .tint(Color.white)
-                .foregroundStyle(.white)
+                .tint(Color.textApp)
+                .foregroundStyle(.textApp)
         }
         .padding(20)
-        .background(Color.vulcan.opacity(0.5))
+        .background(Color.backgroundApp.opacity(0.5))
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .disabled(true)

@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 @main
 struct MovieDBApp: App {
+    init() {
+        KingfisherManager.shared.downloader.downloadTimeout = 60.0
+    }
+    
     var body: some Scene {
         WindowGroup {
             RootScreen()

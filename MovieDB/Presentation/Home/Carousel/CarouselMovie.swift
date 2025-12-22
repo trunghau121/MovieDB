@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CarouselMovie: View {
     private let containerWidth: CGFloat = UIScreen.main.bounds.width
+    private let containerHeight: CGFloat = UIScreen.main.bounds.height
     var movies: [Movie]
     @Binding var movieScrollVisible: Movie?
     var moveToDetail: ((Int) -> Void)
@@ -24,12 +25,13 @@ struct CarouselMovie: View {
             let ajustMenWidth: CGFloat = (trailingSpace / 2) - spacing
             HStack(spacing: spacing) {
                 ForEach(movies.indices, id: \.self) { index in
-                    carouselItem(movies[index], width: itemWidth, index: index)
+                    carouselItem(index: index, width: itemWidth)
                         .frame(width: itemWidth)
                         .scaleEffect(1.0 - abs(distance(index)) * 0.2 )
-                        .opacity(1.0 - abs(distance(index)) * 0.3 )
+//                        .opacity(1.0 - abs(distance(index)) * 0.3 )
                 }
             }
+            .frame(height: containerHeight *  0.42)
             .padding(.horizontal, spacing)
             .offset(x: (CGFloat(currentIndex) * -width) + ajustMenWidth + dragOffset)
             .gesture(
@@ -58,47 +60,27 @@ struct CarouselMovie: View {
     
     
     
-    private func carouselItem(_ movie: Movie, width: CGFloat, index: Int) -> some View {
-        VStack(spacing: 15) {
+    private func carouselItem(index: Int, width: CGFloat) -> some View {
+        VStack(spacing: 10) {
             AsyncImageApp(
-                url: movie.posterPath,
+                url: movies[index].posterPath,
                 size: .init(
                     width: width,
-                    height: 300
+                    height: containerHeight *  0.37
                 )
             )
             .background(Color.gray)
             .clipShape(RoundedRectangle(cornerRadius: 15))
+            .shadow(radius: 10)
             
-            Text(movie.title)
+            Text(movies[index].title)
                 .font(.system(size: 16, weight: .bold))
                 .lineLimit(1)
-                .foregroundColor(.white)
+                .foregroundColor(.textApp)
                 .opacity(1.0 - abs(distance(index)) * 1)
         }
         .onTapGesture {
-            moveToDetail(movie.id)
-        }
-    }
-    
-    struct RatingView: View {
-        var rating: Int
-        
-        var maximumRating = 5
-        var offColor = Color.gray
-        var onColor = Color.yellow
-        
-        var body: some View {
-            HStack {
-                // Loop from 1 up to the maximum rating
-                ForEach(1..<maximumRating + 1, id: \.self) { number in
-                    Image(systemName: number > rating ? "star" : "star.fill") // Toggle between empty and filled star
-                        .foregroundColor(number > rating ? offColor : onColor)
-                        .scaledToFill()
-                        .frame(height: 5)
-                }
-            }
-            .buttonStyle(.plain) // Important for correct tap behavior within Lists/Forms
+            moveToDetail(movies[index].id)
         }
     }
 }

@@ -6,17 +6,20 @@
 //
 
 enum SlideMenuType: Int, CaseIterable {
+    case Home
     case Favorite
-    case Language
+    case Settings
     case Feedback
     case About
     
     var title: String {
         switch self {
+        case .Home:
+            return AppText.homeMenu.localized()
         case .Favorite:
             return AppText.favoriteMenu.localized()
-        case .Language:
-            return AppText.languageMenu.localized()
+        case .Settings:
+            return AppText.settingMenu.localized()
         case .Feedback:
             return AppText.feedbackMenu.localized()
         case .About:
@@ -26,10 +29,12 @@ enum SlideMenuType: Int, CaseIterable {
     
     var icon: String {
         switch self {
+        case .Home:
+            return AppIcon.home
         case .Favorite:
             return AppIcon.favorite
-        case .Language:
-            return AppIcon.language
+        case .Settings:
+            return AppIcon.settings
         case .Feedback:
             return AppIcon.feedback
         case .About:

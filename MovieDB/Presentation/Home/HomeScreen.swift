@@ -11,43 +11,22 @@ struct HomeScreen: View {
     private let containerHeight: CGFloat = UIScreen.main.bounds.height
     @StateObject var viewModel = HomeViewModel()
     @EnvironmentObject var router: NavigationRouter
-    @State var presentSlideMenu = false
-    @State var selectedSlideMenu = -1
     @State var movieScrollVisible: Movie? = nil
     
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack(alignment: .topLeading) {
             if let movie = movieScrollVisible {
                 BackdropMovie(movie: movie)
-                    .ignoresSafeArea()
-                    .frame(height: containerHeight * 0.40)
+                    .frame(height: containerHeight * 0.45)
             }
-            
-            VStack {
-                // Header
-                HomeHeader {
-                    presentSlideMenu.toggle()
-                }
-                .padding(.horizontal, 24)
-                
-                Spacer()
-                    .frame(height: containerHeight *  0.08)
-                
-                // Content
-                content
-            }
-            
-            // Slide Menu
-            SlideMenu(
-                isShowing: $presentSlideMenu,
-                content: AnyView(SlideMenuView(selectedTabMenu: $selectedSlideMenu, presentSlideMenu: $presentSlideMenu))
-            )
-            
+            // Content
+            content
             // Loading
             if viewModel.isLoading {
                 Loading()
             }
         }
+        
         .onAppear {
             viewModel.loadTrending()
         }
@@ -57,13 +36,14 @@ struct HomeScreen: View {
         .toast(item: $viewModel.toast) { toast in
             Text(toast.message).padding()
         }
-        .background(Color.vulcan)
-        .preferredColorScheme(.light)
     }
     
     @ViewBuilder
     var content: some View {
         VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: containerHeight *  0.14)
+            
             CarouselMovie(movies: viewModel.trending, movieScrollVisible: $movieScrollVisible) { movieId in
                 viewModel.didSelect(movieId)
             }

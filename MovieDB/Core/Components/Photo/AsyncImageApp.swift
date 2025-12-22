@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct AsyncImageApp: View {
     let url: String
@@ -45,20 +46,13 @@ struct AsyncImageApp: View {
         }
         
         var body: some View {
-            Group {
-                if #available(macCatalyst 15.0, *), #available(iOS 15.0, *) {
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                } else {
-                    ImageView(withURL: url.absoluteString)
-                        .scaledToFill()
+            KFImage(url)
+                .placeholder {
+                    ProgressView()
                 }
-            }
+                .fade(duration: 0.2)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
         }
     }
     
