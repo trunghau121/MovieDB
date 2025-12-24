@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct AboutScreen: View {
+    @Binding var showSlideMenu: Bool
+    
     var body: some View {
         ZStack {
+            Color.cyan
+                .ignoresSafeArea()
+            
             Text(AppText.aboutMenu.localized())
                 .font(.title)
         }
-        .background(.backgroundApp)
+        .animationOpenCloseSlideMenu(showSlideMenu)
     }
 }
 

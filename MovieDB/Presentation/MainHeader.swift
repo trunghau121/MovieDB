@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HomeHeader: View {
-    @Binding var isShowMenu: Bool
-    @Binding var isForceWhite: Bool
+struct MainHeader: View {
+    @Binding var showSlideMenu: Bool
+    @Binding var forceWhite: Bool
     var openMenu: (() -> Void)
     
     var body: some View {
@@ -20,9 +20,9 @@ struct HomeHeader: View {
                 VStack(alignment: .leading,spacing: 5) {
                     Capsule()
                         .fill(getColor())
-                        .frame(width: isShowMenu ? 25 : 20, height: 3)
-                        .rotationEffect(.init(degrees: isShowMenu ? -50 : 0))
-                        .offset(x: isShowMenu ? 3 : 0, y: isShowMenu ? 9 : 0)
+                        .frame(width: showSlideMenu ? 25 : 20, height: 3)
+                        .rotationEffect(.init(degrees: showSlideMenu ? -50 : 0))
+                        .offset(x: showSlideMenu ? 3 : 0, y: showSlideMenu ? 9 : 0)
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Capsule()
@@ -31,17 +31,17 @@ struct HomeHeader: View {
                         
                         Capsule()
                             .fill(getColor())
-                            .frame(width: isShowMenu ? 25 : 15, height: 3)
-                            .offset(y: isShowMenu ? -8 : 0)
+                            .frame(width: showSlideMenu ? 25 : 15, height: 3)
+                            .offset(y: showSlideMenu ? -8 : 0)
                     }
-                    .rotationEffect(.init(degrees: isShowMenu ? 50 : 0))
+                    .rotationEffect(.init(degrees: showSlideMenu ? 50 : 0))
                 }
                 .shadow(radius: 5, x: 5, y: 5)
             }
             .padding()
             
             Spacer()
-            if isShowMenu {
+            if showSlideMenu {
                 Image(AppIcon.horizontalLogo)
                 Spacer()
             }
@@ -55,9 +55,9 @@ struct HomeHeader: View {
     }
     
     func getColor() -> Color {
-        if !isShowMenu && isForceWhite {
+        if !showSlideMenu && forceWhite {
             return .white
-        } else if isShowMenu {
+        } else if showSlideMenu {
             return .backgroundApp
         } else {
             return .slideMenu
@@ -65,15 +65,15 @@ struct HomeHeader: View {
     }
 }
 
-struct HomeHeader_Previews: PreviewProvider {
+struct MainHeader_Previews: PreviewProvider {
     
     struct ContainerView: View {
-        @State var isForceWhite: Bool = false
-        @State var isShowMenu: Bool = false
+        @State var forceWhite: Bool = false
+        @State var showSlideMenu: Bool = false
         var body: some View {
-            HomeHeader(isShowMenu: $isShowMenu, isForceWhite: $isForceWhite) {
+            MainHeader(showSlideMenu: $showSlideMenu, forceWhite: $forceWhite) {
                 withAnimation(.spring()) {
-                    isShowMenu.toggle()
+                    showSlideMenu.toggle()
                 }
             }
             .background(Color.black)

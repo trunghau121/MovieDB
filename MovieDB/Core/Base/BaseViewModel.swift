@@ -34,6 +34,25 @@ class BaseViewModel<NavEvent>: ObservableObject {
         navigation.send(event)
     }
     
+    // MARK: -Helper: No need state
+    func performAsyn<T>(
+        operation: @escaping () async throws -> T,
+        onLoading: @escaping (Bool) -> Void,
+        onSuccess: @escaping (T) -> Void,
+        onError: @escaping (Error) -> Void
+    ) {
+        Task {
+            onLoading(true)
+            do {
+                let value = try await operation()
+                onSuccess(value)
+            } catch {
+                onError(error)
+            }
+            onLoading(false)
+        }
+    }
+    
     // MARK: -Helper: run asyn usecase or API and return T
     func performAsyn<T>(
         showLoading: Bool = true,
@@ -41,19 +60,21 @@ class BaseViewModel<NavEvent>: ObservableObject {
         onSuccess: @escaping (T) -> Void,
         onError: @escaping (Error) -> Void
     ) {
-        Task {
-            if showLoading {
-                loadState = .loading
-            }
-            do {
-                let value = try await operation()
-                loadState = .success
-                onSuccess(value)
-            } catch {
-                loadState = .error(error.localizedDescription)
+        performAsyn(
+            operation: operation,
+            onLoading: { loading in
+                if showLoading && loading {
+                    self.loadState = .loading
+                }
+            },
+            onSuccess: { results in
+                self.loadState = .success
+                onSuccess(results)
+            }, onError: { error in
+                self.loadState = .error(error.localizedDescription)
                 onError(error)
             }
-        }
+        )
     }
     
     // MARK: -Helper: show toast when running asyn usecase or API and return T
@@ -81,13 +102,13 @@ class BaseViewModel<NavEvent>: ObservableObject {
                         message = content?.json ?? "Error from Server. Please check again!"
                         break
                     case APIError.invalidResponse:
-                        message = "The response is invalid"
+                        message = AppText.invalidResponse.localized()
                         break
                     case APIError.invalidURL:
-                        message = "The URL is invalid"
+                        message = AppText.invalidURL.localized()
                         break
                     default:
-                        message = "Something wrong, please try again!"
+                        message = AppText.unknownError.localized()
                     }
                     
                     self.showToast(message: message, style: .error)

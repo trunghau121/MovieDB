@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct FeedbackScreen: View {
+    @Binding var showSlideMenu: Bool
+    
     var body: some View {
         ZStack {
+            Color.green
+                .ignoresSafeArea()
+            
             Text(AppText.feedbackMenu.localized())
                 .font(.title)
         }
-        .background(.backgroundApp)
+        .animationOpenCloseSlideMenu(showSlideMenu)
     }
 }

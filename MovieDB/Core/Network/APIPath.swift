@@ -10,6 +10,8 @@ import Foundation
 public enum APIPath: String {
     case Trending = "trending/movie/day"
     case Popular = "movie/popular"
+    case Now = "movie/now_playing"
+    case Soon = "movie/upcoming"
 }
 
 public extension APIPath {

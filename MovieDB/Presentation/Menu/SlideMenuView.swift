@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SlideMenuView: View {
     @Binding var selectedTabMenu: Int
-    @Binding var presentSlideMenu: Bool
+    @Binding var showSlideMenu: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,7 +20,7 @@ struct SlideMenuView: View {
                     title: row.title
                 ) {
                     withAnimation(.spring()) {
-                        presentSlideMenu.toggle()
+                        showSlideMenu.toggle()
                         self.selectedTabMenu = row.rawValue
                     }
                 }
@@ -78,7 +78,7 @@ struct SlideMenuView_Previews: PreviewProvider {
         var body: some View {
             SlideMenuView(
                 selectedTabMenu: $selectedSlideMenu,
-                presentSlideMenu: $presentSlideMenu
+                showSlideMenu: $presentSlideMenu
             )
         }
     }

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct RootScreen: View {
     @StateObject var router = NavigationRouter.shared
-    @State var presentSlideMenu = false
+    @State var showSlideMenu = false
     @State var selectedSlideMenu = 0
     
     var body: some View {
@@ -21,49 +21,41 @@ struct RootScreen: View {
                     // Slide Menu
                     SlideMenuView(
                         selectedTabMenu: $selectedSlideMenu,
-                        presentSlideMenu: $presentSlideMenu
+                        showSlideMenu: $showSlideMenu
                     )
                     
-                    TabView(selection: $selectedSlideMenu) {
-                        // Home screen
-                        HomeScreen()
-                            .environmentObject(router)
-                            .tag(0)
-                            .ignoresSafeArea()
-                        
-                        // Favorite screen
-                        FavoriteScreen()
-                            .environmentObject(router)
-                            .tag(1)
-                            .ignoresSafeArea()
-                        
-                        // Settings screen
-                        SettingsScreen()
-                            .environmentObject(router)
-                            .tag(2)
-                            .ignoresSafeArea()
-                        
-                        // Feedback screen
-                        FeedbackScreen()
-                            .environmentObject(router)
-                            .tag(3)
-                            .ignoresSafeArea()
-                        
-                        // About screen
-                        AboutScreen()
-                            .environmentObject(router)
-                            .tag(4)
-                            .ignoresSafeArea()
+                    shaddowViews(scale: 0.62, offsetWidth: 220)
+                    shaddowViews(scale: 0.66, offsetWidth: 195)
+                    
+                    Group {
+                        switch(selectedSlideMenu) {
+                        case 1:
+                            // Favorite screen
+                            FavoriteScreen(showSlideMenu: $showSlideMenu)
+                                .environmentObject(router)
+                        case 2:
+                            // Settings screen
+                            SettingsScreen(showSlideMenu: $showSlideMenu)
+                                .environmentObject(router)
+                        case 3:
+                            // Feedback screen
+                            FeedbackScreen(showSlideMenu: $showSlideMenu)
+                                .environmentObject(router)
+                        case 4:
+                            // About screen
+                            AboutScreen(showSlideMenu: $showSlideMenu)
+                                .environmentObject(router)
+                        default:
+                            // Home screen
+                            HomeScreen(showSlideMenu: $showSlideMenu)
+                                .environmentObject(router)
+                        }
                     }
-                    .background(Color.backgroundApp)
-                    .cornerRadius(presentSlideMenu ? 20 : 0)
-                    .scaleEffect(presentSlideMenu ? 0.70 : 1)
-                    .offset(x: presentSlideMenu ? UIScreen.main.bounds.width - 150 : 0)
                     .ignoresSafeArea()
                     .overlay(
-                        HomeHeader(
-                            isShowMenu: $presentSlideMenu,
-                            isForceWhite: Binding<Bool>(
+                        MainHeader(
+                            showSlideMenu: $showSlideMenu,
+                            forceWhite: Binding<Bool>(
                                 get: {
                                     return selectedSlideMenu == 0
                                 },
@@ -71,7 +63,7 @@ struct RootScreen: View {
                             )
                         ) {
                             withAnimation(.spring()) {
-                                presentSlideMenu.toggle()
+                                showSlideMenu.toggle()
                             }
                         },
                         alignment: .topLeading
@@ -103,6 +95,18 @@ struct RootScreen: View {
         } else {
             EmptyView()
         }
+    }
+    
+    @ViewBuilder
+    private func shaddowViews(scale: CGFloat, offsetWidth: CGFloat) -> some View {
+        Color.backgroundApp
+            .opacity(0.5)
+            .cornerRadius(20)
+            .shadow(color: Color.backgroundApp.opacity(0.7), radius: 5, x: -5, y: 0)
+            .cornerRadius(showSlideMenu ? 15 : 0)
+            .scaleEffect(showSlideMenu ? scale : 1)
+            .offset(x: showSlideMenu ? UIScreen.main.bounds.width - offsetWidth : 0)
+            .ignoresSafeArea()
     }
 }
 

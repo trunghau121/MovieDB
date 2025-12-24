@@ -11,7 +11,6 @@ import Kingfisher
 
 struct AsyncImageApp: View {
     let url: String
-    let size: CGSize
     
     private var imageURL: URL? {
         return URL(string: Enviroment.photo500Url + url)
@@ -25,7 +24,6 @@ struct AsyncImageApp: View {
                 placeholder
             }
         }
-        .frame(maxWidth: size.width, maxHeight: size.height)
     }
     
     @ViewBuilder

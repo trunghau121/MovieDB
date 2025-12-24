@@ -12,6 +12,7 @@ struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
     @EnvironmentObject var router: NavigationRouter
     @State var movieScrollVisible: Movie? = nil
+    @Binding var showSlideMenu: Bool
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -26,9 +27,10 @@ struct HomeScreen: View {
                 Loading()
             }
         }
-        
+        .animationOpenCloseSlideMenu(showSlideMenu)
         .onAppear {
             viewModel.loadTrending()
+            viewModel.loadMovieWithTab(tab: .popular)
         }
         .onReceive(viewModel.navigation) { event in
             handleNavigation(event)
@@ -47,6 +49,8 @@ struct HomeScreen: View {
             CarouselMovie(movies: viewModel.trending, movieScrollVisible: $movieScrollVisible) { movieId in
                 viewModel.didSelect(movieId)
             }
+            
+            MovieTabbed(homeViewModel: viewModel)
         }.onReceive(viewModel.$trending) { movies in
             movieScrollVisible = movies.first
         }
@@ -64,6 +68,15 @@ struct HomeScreen: View {
 }
 
 
-#Preview {
-    HomeScreen()
+struct HomeScreen_Previews: PreviewProvider {
+    struct ContainerView: View {
+        @State var showSlideMenu: Bool = false
+        var body: some View {
+            HomeScreen(showSlideMenu: $showSlideMenu)
+        }
+    }
+    
+    static var previews: some View {
+        ContainerView()
+    }
 }

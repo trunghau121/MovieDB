@@ -23,10 +23,10 @@ enum MovieDBRoute: AppRoute {
     @ViewBuilder
     func build() -> some View {
         switch self {
-        case .home:
-            HomeScreen()
         case .detail(let movieId):
             DetailScreen(movieId: movieId)
+        default:
+            EmptyView()
         }
     }
 }

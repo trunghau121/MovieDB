@@ -28,5 +28,21 @@ public class MovieRepositoryImp: MovieRepository {
         return dtoResult.toDomain()
     }
     
+    public func getNow(language: String?) async throws -> [Movie] {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: MovieListDTO = try await apiClient.request(APIPath.Now, query: query)
+        return dtoResult.toDomain()
+    }
+    
+    public func getSoon(language: String?) async throws -> [Movie] {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: MovieListDTO = try await apiClient.request(APIPath.Soon, query: query)
+        return dtoResult.toDomain()
+    }
+    
     
 }

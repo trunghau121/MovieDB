@@ -62,19 +62,14 @@ struct CarouselMovie: View {
     
     private func carouselItem(index: Int, width: CGFloat) -> some View {
         VStack(spacing: 10) {
-            AsyncImageApp(
-                url: movies[index].posterPath,
-                size: .init(
-                    width: width,
-                    height: containerHeight *  0.37
-                )
-            )
+            AsyncImageApp(url: movies[index].posterPath)
             .background(Color.gray)
             .clipShape(RoundedRectangle(cornerRadius: 15))
-            .shadow(radius: 10)
+            .shadow(color: .slideMenu.opacity(0.2), radius: 10, x: 5, y: 0)
+            .frame(width: width, height: containerHeight *  0.37)
             
             Text(movies[index].title)
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 16, weight: .semibold))
                 .lineLimit(1)
                 .foregroundColor(.textApp)
                 .opacity(1.0 - abs(distance(index)) * 1)

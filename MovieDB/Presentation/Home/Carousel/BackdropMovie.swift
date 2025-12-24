@@ -12,15 +12,10 @@ struct BackdropMovie: View {
     var movie: Movie
     
     var body: some View {
-        AsyncImageApp(
-            url: movie.backdropPath,
-            size: .init(
-                width: containerWidth,
-                height: .infinity
-            )
-        )
+        AsyncImageApp(url: movie.backdropPath)
         .background(Color.gray)
         .blur(radius: 20)
         .clipShape(RoundedCornersShape(radius: 15,  conners: [.bottomLeft, .bottomRight]))
+        .frame(width: containerWidth)
     }
 }

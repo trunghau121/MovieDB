@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct FavoriteScreen: View {
+    @Binding var showSlideMenu: Bool
+    
     var body: some View {
         ZStack {
+            Color.yellow
+                .ignoresSafeArea()
+            
             Text(AppText.favoriteMenu.localized())
                 .font(.title)
         }
-        .background(.backgroundApp)
-        .ignoresSafeArea()
+        .animationOpenCloseSlideMenu(showSlideMenu)
     }
 }

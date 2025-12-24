@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct SettingsScreen: View {
+    @Binding var showSlideMenu: Bool
+    
     var body: some View {
         ZStack {
+            Color.orange
+                .ignoresSafeArea()
+            
             Text(AppText.settingMenu.localized())
                 .font(.title)
         }
-        .background(.backgroundApp)
+        .animationOpenCloseSlideMenu(showSlideMenu)
     }
 }
