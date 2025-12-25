@@ -11,6 +11,7 @@ import SwiftUI
 
 struct RootScreen: View {
     @StateObject var router = NavigationRouter.shared
+    @StateObject var localizableManager = LocalizableManager.shared
     @State var showSlideMenu = false
     @State var selectedSlideMenu = 0
     
@@ -37,6 +38,7 @@ struct RootScreen: View {
                             // Settings screen
                             SettingsScreen(showSlideMenu: $showSlideMenu)
                                 .environmentObject(router)
+                                .environmentObject(localizableManager)
                         case 3:
                             // Feedback screen
                             FeedbackScreen(showSlideMenu: $showSlideMenu)

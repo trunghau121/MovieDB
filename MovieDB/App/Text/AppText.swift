@@ -25,4 +25,14 @@ public struct AppText {
     static let nowTab = "now_tab"
     static let soonTab = "soon_tab"
     // End
+    
+    // Settings
+    static let language = "language"
+    static let englishSetting = "english_setting"
+    static let vietnameseSetting = "vietnamese_setting"
+    // End
+    
+    // Home
+    static let noDataMovie = "no_data_movie"
+    // End
 }

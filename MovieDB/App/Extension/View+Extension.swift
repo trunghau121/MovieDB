@@ -16,4 +16,8 @@ extension View {
             .offset(x: isShowMenu ? UIScreen.main.bounds.width - 170 : 0)
             .ignoresSafeArea()
     }
+    
+    func applyPaddingStatusBar() -> some View {
+        self.padding(.top, AppContainer.getStatusBarHeight())
+    }
 }

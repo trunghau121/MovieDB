@@ -16,9 +16,10 @@ struct MovieItem: View {
     var body: some View {
         VStack(spacing: 10) {
             AsyncImageApp(url: movie.posterPath)
+                .background(Color.gray)
                 .frame(width: width, height: height - textHeight - 30)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(color: .slideMenu.opacity(0.2), radius: 5, x: 2, y: 0)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             
             Text(movie.title)
                 .font(.system(size: 14, weight: .semibold))
@@ -34,6 +35,7 @@ struct MovieItem: View {
                 )
         }
         .frame(width: width, height: height)
+        .padding(.horizontal, 7)
     }
 }
 

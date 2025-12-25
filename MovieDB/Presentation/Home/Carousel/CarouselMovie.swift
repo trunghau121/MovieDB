@@ -31,7 +31,6 @@ struct CarouselMovie: View {
 //                        .opacity(1.0 - abs(distance(index)) * 0.3 )
                 }
             }
-            .frame(height: containerHeight *  0.42)
             .padding(.horizontal, spacing)
             .offset(x: (CGFloat(currentIndex) * -width) + ajustMenWidth + dragOffset)
             .gesture(
@@ -50,7 +49,6 @@ struct CarouselMovie: View {
                 movieScrollVisible = movies[index]
             }
             .animation(.easeInOut, value: dragOffset == 0)
-            
         }
     }
     
@@ -64,9 +62,9 @@ struct CarouselMovie: View {
         VStack(spacing: 10) {
             AsyncImageApp(url: movies[index].posterPath)
             .background(Color.gray)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: .slideMenu.opacity(0.2), radius: 10, x: 5, y: 0)
             .frame(width: width, height: containerHeight *  0.37)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             
             Text(movies[index].title)
                 .font(.system(size: 16, weight: .semibold))

@@ -31,6 +31,8 @@ struct AsyncImageApp: View {
         Color.gray.opacity(0.2)
             .overlay(
                 Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .font(.largeTitle)
                     .foregroundColor(.gray)
             )

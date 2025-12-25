@@ -50,7 +50,7 @@ struct TabBar: View {
                 .withTabButtonStyle()
             }
         }
-        .frame(width: UIScreen.main.bounds.width / 1.5)
+        .frame(width: UIScreen.main.bounds.width / 1.2)
         .padding(6)
     }
 }

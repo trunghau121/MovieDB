@@ -15,7 +15,7 @@ struct BackdropMovie: View {
         AsyncImageApp(url: movie.backdropPath)
         .background(Color.gray)
         .blur(radius: 20)
-        .clipShape(RoundedCornersShape(radius: 15,  conners: [.bottomLeft, .bottomRight]))
         .frame(width: containerWidth)
+        .clipShape(RoundedCornersShape(radius: 15,  conners: [.bottomLeft, .bottomRight]))
     }
 }

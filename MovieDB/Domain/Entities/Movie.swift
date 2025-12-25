@@ -23,4 +23,16 @@ public struct Movie: Identifiable {
         self.releaseDate = releaseDate
         self.overview = overview
     }
+    
+    static let placeholder: [Self] = (0..<10).map { index in
+        .init(
+            id: index,
+            title: "                               ",
+            backdropPath: "",
+            posterPath: "",
+            voteAverage: 0.0,
+            releaseDate: "",
+            overview: ""
+        )
+    }
 }

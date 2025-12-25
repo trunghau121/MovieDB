@@ -10,6 +10,9 @@ import Combine
 
 @MainActor
 class BaseViewModel<NavEvent>: ObservableObject {
+    // Tasks
+    private(set) var tasks = Set<Task<Void, Never>>()
+    
     // State for screen
     @Published var loadState: LoadState = .idle
     // Handle loading
@@ -35,13 +38,15 @@ class BaseViewModel<NavEvent>: ObservableObject {
     }
     
     // MARK: -Helper: No need state
+    @MainActor
+    @discardableResult
     func performAsyn<T>(
         operation: @escaping () async throws -> T,
         onLoading: @escaping (Bool) -> Void,
         onSuccess: @escaping (T) -> Void,
         onError: @escaping (Error) -> Void
-    ) {
-        Task {
+    ) -> Task<Void, Never> {
+        let task = Task {
             onLoading(true)
             do {
                 let value = try await operation()
@@ -51,16 +56,21 @@ class BaseViewModel<NavEvent>: ObservableObject {
             }
             onLoading(false)
         }
+        tasks.insert(task)
+        
+        return task
     }
     
     // MARK: -Helper: run asyn usecase or API and return T
+    @MainActor
+    @discardableResult
     func performAsyn<T>(
         showLoading: Bool = true,
         operation: @escaping () async throws -> T,
         onSuccess: @escaping (T) -> Void,
         onError: @escaping (Error) -> Void
-    ) {
-        performAsyn(
+    ) -> Task<Void, Never> {
+        return performAsyn(
             operation: operation,
             onLoading: { loading in
                 if showLoading && loading {
@@ -78,43 +88,31 @@ class BaseViewModel<NavEvent>: ObservableObject {
     }
     
     // MARK: -Helper: show toast when running asyn usecase or API and return T
+    @MainActor
+    @discardableResult
     func performAsyn<T>(
         showLoading: Bool = true,
         showErrorToast: Bool = true,
         operation: @escaping () async throws -> T,
         onSuccess: @escaping (T) -> Void
-    ) {
-        performAsyn(
+    ) -> Task<Void, Never> {
+        return performAsyn(
             showLoading: showLoading,
             operation: operation,
             onSuccess: onSuccess,
             onError: { error in
                 if showErrorToast {
-                    var message: String
-                    switch error {
-                    case APIError.unknown(let err):
-                        message = err.localizedDescription
-                        break
-                    case APIError.decodingError(let err):
-                        message = err.localizedDescription
-                        break
-                    case APIError.httpStatusCode(_, let content):
-                        message = content?.json ?? "Error from Server. Please check again!"
-                        break
-                    case APIError.invalidResponse:
-                        message = AppText.invalidResponse.localized()
-                        break
-                    case APIError.invalidURL:
-                        message = AppText.invalidURL.localized()
-                        break
-                    default:
-                        message = AppText.unknownError.localized()
-                    }
-                    
-                    self.showToast(message: message, style: .error)
+                    self.showToast(message: error.getErrorMessage(), style: .error)
                 }
             }
         )
+    }
+    
+    // Cancel all tasks
+    deinit {
+        tasks.forEach { task in
+            task.cancel()
+        }
     }
     
 }

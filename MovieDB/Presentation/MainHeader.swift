@@ -38,7 +38,6 @@ struct MainHeader: View {
                 }
                 .shadow(radius: 5, x: 5, y: 5)
             }
-            .padding()
             
             Spacer()
             if showSlideMenu {
@@ -50,8 +49,10 @@ struct MainHeader: View {
                 .foregroundColor(getColor())
                 .font(.title2)
                 .shadow(radius: 5, x: 5, y: 5)
-                .padding()
         }
+        .applyPaddingStatusBar()
+        .padding()
+        .ignoresSafeArea()
     }
     
     func getColor() -> Color {

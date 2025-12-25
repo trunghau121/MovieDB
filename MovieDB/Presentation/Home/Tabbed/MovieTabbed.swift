@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct MovieTabbed: View {
-    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     
     var body: some View {
         WithTabBar { selection in
-            MovieTabView(movies: homeViewModel.movieTabs)
-                .onChange(of: selection) { value in
-                    homeViewModel.movieTabs.removeAll()
-                    homeViewModel.loadMovieWithTab(tab: value)
-                }
+            CollectionLoadingView(loadingState: viewModel.movieTabState) { movies in
+                MovieTabView(movies: movies)
+            } empty: {
+                AppEmptyView()
+            } error: { error in
+                ErrorView(message: error.getErrorMessage())
+            }
+            .onChange(of: selection) { value in
+                viewModel.movieTabState = .loading(placeholder: Movie.placeholder)
+                viewModel.loadMovieWithTab(tab: value)
+            }
+            .onAppear {
+                viewModel.loadMovieWithTab(tab: .popular)
+            }
         }
     }
 }

@@ -28,15 +28,8 @@ struct HomeScreen: View {
             }
         }
         .animationOpenCloseSlideMenu(showSlideMenu)
-        .onAppear {
-            viewModel.loadTrending()
-            viewModel.loadMovieWithTab(tab: .popular)
-        }
         .onReceive(viewModel.navigation) { event in
             handleNavigation(event)
-        }
-        .toast(item: $viewModel.toast) { toast in
-            Text(toast.message).padding()
         }
     }
     
@@ -44,15 +37,38 @@ struct HomeScreen: View {
     var content: some View {
         VStack(alignment: .leading) {
             Spacer()
-                .frame(height: containerHeight *  0.14)
+                .frame(height: containerHeight *  0.16)
             
-            CarouselMovie(movies: viewModel.trending, movieScrollVisible: $movieScrollVisible) { movieId in
-                viewModel.didSelect(movieId)
+            CollectionLoadingView(loadingState: viewModel.trendingState) { movies in
+                CarouselMovie(movies: movies, movieScrollVisible: $movieScrollVisible) { movieId in
+                    viewModel.didSelect(movieId)
+                }
+            } empty: {
+                ZStack {
+                    AppEmptyView()
+                }
+                .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
+                .background(.red)
+                .clipShape(RoundedCornersShape(radius: 15))
+            } error: { error in
+                ZStack {
+                    ErrorView(message: error.getErrorMessage())
+                }
+                .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
+                .background(.red)
+                .clipShape(RoundedCornersShape(radius: 15))
             }
-            
-            MovieTabbed(homeViewModel: viewModel)
-        }.onReceive(viewModel.$trending) { movies in
-            movieScrollVisible = movies.first
+            .onAppear {
+                viewModel.loadTrending()
+            }
+
+            MovieTabbed(viewModel: viewModel)
+        }.onReceive(viewModel.$trendingState) { state in
+            if case let .loaded(movies) = state {
+                movieScrollVisible = movies.first
+            } else if case let .loading(placeholder) = state {
+                movieScrollVisible = placeholder.first
+            }
         }
     }
     

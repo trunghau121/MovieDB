@@ -13,7 +13,7 @@ struct MovieTabView: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 15) {
+                LazyHStack(spacing: 0) {
                     ForEach(movies) { movie in
                         MovieItem(movie: movie, height: proxy.size.height)
                     }
