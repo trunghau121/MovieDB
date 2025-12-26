@@ -28,7 +28,6 @@ struct CarouselMovie: View {
                     carouselItem(index: index, width: itemWidth)
                         .frame(width: itemWidth)
                         .scaleEffect(1.0 - abs(distance(index)) * 0.2 )
-//                        .opacity(1.0 - abs(distance(index)) * 0.3 )
                 }
             }
             .padding(.horizontal, spacing)
@@ -62,9 +61,9 @@ struct CarouselMovie: View {
         VStack(spacing: 10) {
             AsyncImageApp(url: movies[index].posterPath)
             .background(Color.gray)
-            .shadow(color: .slideMenu.opacity(0.2), radius: 10, x: 5, y: 0)
             .frame(width: width, height: containerHeight *  0.37)
             .clipShape(RoundedRectangle(cornerRadius: 15))
+            .shadow(color: .shadowApp.opacity(0.2), radius: 10, x: 5, y: 0)
             
             Text(movies[index].title)
                 .font(.system(size: 16, weight: .semibold))

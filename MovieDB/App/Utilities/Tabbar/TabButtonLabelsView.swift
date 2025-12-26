@@ -14,9 +14,10 @@ struct ActiveTabLabel: View {
         VStack {
             Text(tabItem.title)
                 .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.selectedSlideMenu)
             
             Capsule()
-                .fill(.slideMenu)
+                .fill(.selectedSlideMenu)
                 .frame(height: 3)
         }
     }
@@ -31,7 +32,7 @@ struct InActiveTabLabel: View {
                 .font(.system(size: 16, weight: .semibold))
             
             Capsule()
-                .fill(.slideMenu.opacity(0))
+                .fill(.selectedSlideMenu.opacity(0))
                 .frame(height: 3)
         }
     }

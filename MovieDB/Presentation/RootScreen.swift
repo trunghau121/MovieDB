@@ -54,6 +54,7 @@ struct RootScreen: View {
                         }
                     }
                     .ignoresSafeArea()
+                    .disabled(showSlideMenu)
                     .overlay(
                         MainHeader(
                             showSlideMenu: $showSlideMenu,
@@ -93,7 +94,10 @@ struct RootScreen: View {
     @ViewBuilder
     private var nextView: some View {
         if let route = router.path.last {
-            route.build()
+            route
+                .build()
+                .environmentObject(router)
+                .navigationBarBackButtonHidden(true)
         } else {
             EmptyView()
         }
@@ -101,10 +105,10 @@ struct RootScreen: View {
     
     @ViewBuilder
     private func shaddowViews(scale: CGFloat, offsetWidth: CGFloat) -> some View {
-        Color.backgroundApp
+        Color.shadowApp
             .opacity(0.5)
             .cornerRadius(20)
-            .shadow(color: Color.backgroundApp.opacity(0.7), radius: 5, x: -5, y: 0)
+            .shadow(color: .shadowApp.opacity(0.7), radius: 5, x: -5, y: 0)
             .cornerRadius(showSlideMenu ? 15 : 0)
             .scaleEffect(showSlideMenu ? scale : 1)
             .offset(x: showSlideMenu ? UIScreen.main.bounds.width - offsetWidth : 0)

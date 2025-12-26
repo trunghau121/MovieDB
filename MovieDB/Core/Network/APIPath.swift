@@ -7,17 +7,36 @@
 
 import Foundation
 
-public enum APIPath: String {
-    case Trending = "trending/movie/day"
-    case Popular = "movie/popular"
-    case Now = "movie/now_playing"
-    case Soon = "movie/upcoming"
+public enum APIPath {
+    case Trending
+    case Popular
+    case Now
+    case Soon
+    case Detail(movieId: Int)
+    
+    func fullPath() -> String {
+        var path: String = ""
+        switch self {
+        case .Trending:
+            path = "trending/movie/day"
+        case .Popular:
+            path = "movie/popular"
+        case .Now:
+            path = "movie/now_playing"
+        case .Soon:
+            path = "movie/upcoming"
+        case .Detail(let movieId):
+            path = "movie/\(movieId)"
+        }
+        
+        return Enviroment.baseUrl + path
+    }
 }
 
 public extension APIPath {
     /// params: ["language": "en-US", "page": "2", ...]
     func fullPathUrl(params: [String: String?] = [:]) -> URL? {
-        var components = URLComponents(string: Enviroment.baseUrl + self.rawValue)
+        var components = URLComponents(string: self.fullPath())
         
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "api_key", value: Enviroment.apiKey)

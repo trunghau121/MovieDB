@@ -10,4 +10,5 @@ public protocol MovieRepository {
     func getPopular(language: String?) async throws -> [Movie]
     func getNow(language: String?) async throws -> [Movie]
     func getSoon(language: String?) async throws -> [Movie]
+    func getDetail(movideId: Int, language: String?) async throws -> Movie?
 }

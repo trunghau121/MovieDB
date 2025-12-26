@@ -58,10 +58,8 @@ struct MainHeader: View {
     func getColor() -> Color {
         if !showSlideMenu && forceWhite {
             return .white
-        } else if showSlideMenu {
-            return .backgroundApp
         } else {
-            return .slideMenu
+            return .iconApp
         }
     }
 }

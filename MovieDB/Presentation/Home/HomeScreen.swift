@@ -62,7 +62,9 @@ struct HomeScreen: View {
                 viewModel.loadTrending()
             }
 
-            MovieTabbed(viewModel: viewModel)
+            MovieTabbed(viewModel: viewModel) { movieId in
+                viewModel.didSelect(movieId)
+            }
         }.onReceive(viewModel.$trendingState) { state in
             if case let .loaded(movies) = state {
                 movieScrollVisible = movies.first
@@ -84,15 +86,15 @@ struct HomeScreen: View {
 }
 
 
-struct HomeScreen_Previews: PreviewProvider {
-    struct ContainerView: View {
-        @State var showSlideMenu: Bool = false
-        var body: some View {
-            HomeScreen(showSlideMenu: $showSlideMenu)
-        }
-    }
-    
-    static var previews: some View {
-        ContainerView()
-    }
-}
+//struct HomeScreen_Previews: PreviewProvider {
+//    struct ContainerView: View {
+//        @State var showSlideMenu: Bool = false
+//        var body: some View {
+//            HomeScreen(showSlideMenu: $showSlideMenu)
+//        }
+//    }
+//    
+//    static var previews: some View {
+//        ContainerView()
+//    }
+//}

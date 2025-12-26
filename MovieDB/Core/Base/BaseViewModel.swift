@@ -50,8 +50,10 @@ class BaseViewModel<NavEvent>: ObservableObject {
             onLoading(true)
             do {
                 let value = try await operation()
+                guard !Task.isCancelled else { return }
                 onSuccess(value)
             } catch {
+                if Task.isCancelled { return }
                 onError(error)
             }
             onLoading(false)

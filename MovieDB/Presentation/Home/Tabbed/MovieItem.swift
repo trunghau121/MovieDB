@@ -18,8 +18,8 @@ struct MovieItem: View {
             AsyncImageApp(url: movie.posterPath)
                 .background(Color.gray)
                 .frame(width: width, height: height - textHeight - 30)
-                .shadow(color: .slideMenu.opacity(0.2), radius: 5, x: 2, y: 0)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(color: .shadowApp.opacity(0.2), radius: 5, x: 2, y: 0)
             
             Text(movie.title)
                 .font(.system(size: 14, weight: .semibold))

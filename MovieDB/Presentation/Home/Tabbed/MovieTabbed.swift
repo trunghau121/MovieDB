@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MovieTabbed: View {
     @ObservedObject var viewModel: HomeViewModel
+    var moveToDetail: ((Int) -> Void)
     
     var body: some View {
         WithTabBar { selection in
             CollectionLoadingView(loadingState: viewModel.movieTabState) { movies in
-                MovieTabView(movies: movies)
+                MovieTabView(movies: movies, moveToDetail: moveToDetail)
             } empty: {
                 AppEmptyView()
             } error: { error in

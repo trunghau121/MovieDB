@@ -20,16 +20,19 @@ struct SettingsScreen: View {
                             .applyPaddingStatusBar()
                     ) {
                         ForEach(AppLanguage.allCases) { lang in
-                            HStack {
-                                Text(lang.name)
-                                Spacer()
-                                if lang == localizableManager.currentLanguage {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(.primary)
-                                }
-                            }
-                            .onTapGesture {
+                            Button {
                                 localizableManager.currentLanguage = lang
+                            } label: {
+                                HStack {
+                                    Text(lang.name)
+                                        .foregroundColor(.textApp)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Spacer()
+                                    if lang == localizableManager.currentLanguage {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.textApp)
+                                    }
+                                }
                             }
                         }
                     }
@@ -43,5 +46,20 @@ struct SettingsScreen: View {
         .applyPaddingStatusBar()
         .animationOpenCloseSlideMenu(showSlideMenu)
     }
+    
+}
 
+struct SettingsScreen_Previews: PreviewProvider {
+    struct ContainerView: View {
+        @State var showSlideMenu: Bool = false
+        var localizableManager: LocalizableManager = LocalizableManager.shared
+        var body: some View {
+            SettingsScreen(showSlideMenu: $showSlideMenu)
+                .environmentObject(localizableManager)
+        }
+    }
+    
+    static var previews: some View {
+        ContainerView()
+    }
 }

@@ -45,4 +45,11 @@ public class MovieRepositoryImp: MovieRepository {
     }
     
     
+    public func getDetail(movideId: Int, language: String?) async throws -> Movie? {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: MovieDTO = try await apiClient.request(APIPath.Detail(movieId: movideId), query: query)
+        return dtoResult.toDomain()
+    }
 }
