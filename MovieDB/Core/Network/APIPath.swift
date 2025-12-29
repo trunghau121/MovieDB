@@ -13,6 +13,7 @@ public enum APIPath {
     case Now
     case Soon
     case Detail(movieId: Int)
+    case Search
     
     func fullPath() -> String {
         var path: String = ""
@@ -27,6 +28,8 @@ public enum APIPath {
             path = "movie/upcoming"
         case .Detail(let movieId):
             path = "movie/\(movieId)"
+        case .Search:
+            path = "search/movie"
         }
         
         return Enviroment.baseUrl + path

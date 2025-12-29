@@ -11,6 +11,7 @@ struct MainHeader: View {
     @Binding var showSlideMenu: Bool
     @Binding var forceWhite: Bool
     var openMenu: (() -> Void)
+    var openSearch: (() -> Void)
     
     var body: some View {
         HStack {
@@ -45,10 +46,14 @@ struct MainHeader: View {
                 Spacer()
             }
             
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(getColor())
-                .font(.title2)
-                .shadow(radius: 5, x: 5, y: 5)
+            Button {
+                openSearch()
+            } label: {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(getColor())
+                    .font(.title2)
+                    .shadow(radius: 5, x: 5, y: 5)
+            }
         }
         .applyPaddingStatusBar()
         .padding()
@@ -70,11 +75,18 @@ struct MainHeader_Previews: PreviewProvider {
         @State var forceWhite: Bool = false
         @State var showSlideMenu: Bool = false
         var body: some View {
-            MainHeader(showSlideMenu: $showSlideMenu, forceWhite: $forceWhite) {
-                withAnimation(.spring()) {
-                    showSlideMenu.toggle()
+            MainHeader(
+                showSlideMenu: $showSlideMenu,
+                forceWhite: $forceWhite,
+                openMenu: {
+                    withAnimation(.spring()) {
+                        showSlideMenu.toggle()
+                    }
+                },
+                openSearch: {
+                    
                 }
-            }
+            )
             .background(Color.black)
         }
     }

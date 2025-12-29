@@ -10,6 +10,7 @@ import SwiftUICore
 enum MovieDBRoute: AppRoute {
     case home
     case detail(movieId: Int)
+    case search
     
     var id: AnyHashable {
         switch self {
@@ -17,6 +18,8 @@ enum MovieDBRoute: AppRoute {
             return "home"
         case .detail(let id):
             return "detail-\(id)"
+        case .search:
+            return "search-viewmodel"
         }
     }
     
@@ -25,6 +28,8 @@ enum MovieDBRoute: AppRoute {
         switch self {
         case .detail(let movieId):
             DetailScreen(movieId: movieId)
+        case .search:
+            SearchScreen()
         default:
             EmptyView()
         }

@@ -86,15 +86,15 @@ struct HomeScreen: View {
 }
 
 
-//struct HomeScreen_Previews: PreviewProvider {
-//    struct ContainerView: View {
-//        @State var showSlideMenu: Bool = false
-//        var body: some View {
-//            HomeScreen(showSlideMenu: $showSlideMenu)
-//        }
-//    }
-//    
-//    static var previews: some View {
-//        ContainerView()
-//    }
-//}
+struct HomeScreen_Previews: PreviewProvider {
+    struct ContainerView: View {
+        @State var showSlideMenu: Bool = false
+        var body: some View {
+            HomeScreen(showSlideMenu: $showSlideMenu)
+        }
+    }
+    
+    static var previews: some View {
+        ContainerView()
+    }
+}

@@ -35,4 +35,8 @@ public struct AppText {
     // Home
     static let noDataMovie = "no_data_movie"
     // End
+    
+    // Search
+    static let hintSearch = "hint_search"
+    // End
 }

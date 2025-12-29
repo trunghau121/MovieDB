@@ -72,6 +72,23 @@
         }
       }
     },
+    "hint_search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter keyword to search"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhập từ khóa tìm kiếm"
+          }
+        }
+      }
+    },
     "home_menu" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -63,12 +63,16 @@ struct RootScreen: View {
                                     return selectedSlideMenu == 0
                                 },
                                 set: { _ in }
-                            )
-                        ) {
-                            withAnimation(.spring()) {
-                                showSlideMenu.toggle()
+                            ),
+                            openMenu: {
+                                withAnimation(.spring()) {
+                                    showSlideMenu.toggle()
+                                }
+                            },
+                            openSearch: {
+                                router.push(MovieDBRoute.search)
                             }
-                        },
+                        ),
                         alignment: .topLeading
                     )
                 }
