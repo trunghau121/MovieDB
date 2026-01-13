@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @MainActor
-class HomeViewModel: BaseViewModel<HomeNavigationEvent> {
+class HomeViewModel: BaseViewModel {
     private var repository: MovieRepositoryImp
     private var trendingUseCase: TrendingUseCase
     private var popularUseCase: PopularUseCase
@@ -81,9 +81,5 @@ class HomeViewModel: BaseViewModel<HomeNavigationEvent> {
                 self.movieTabState = .error(error)
             }
         )
-    }
-    
-    func didSelect(_ movieId: Int) {
-        navigate(.openDetail(movieId: movieId))
     }
 }

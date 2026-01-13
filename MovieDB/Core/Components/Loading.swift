@@ -17,8 +17,7 @@ struct Loading: View {
     var body: some View {
         ZStack {
             ProgressView(text)
-                .tint(Color.textApp)
-                .foregroundStyle(.textApp)
+                .foregroundColor(Color.textApp)
         }
         .padding(20)
         .background(Color.backgroundApp.opacity(0.5))

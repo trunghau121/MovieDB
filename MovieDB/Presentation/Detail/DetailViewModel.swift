@@ -9,17 +9,18 @@ import Combine
 import Foundation
 
 @MainActor
-class DetailViewModel: BaseViewModel<NoNavigationEvent> {
+class DetailViewModel: BaseViewModel {
     @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: .placeholder.first!)
     private let repository = MovieRepositoryImp()
     private var detailUseCase: DetailUseCase
+    private var task: Task<Void, Never>? = nil
     
     override init() {
         self.detailUseCase = DetailUseCase(repository: repository)
     }
     
     func getMovieDetail(movieId: Int) {
-        performAsyn(
+        task = performAsyn(
             operation: {
                 try await self.repository.getDetail(movideId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
             },
@@ -39,6 +40,10 @@ class DetailViewModel: BaseViewModel<NoNavigationEvent> {
                 self.state = .error(error)
             }
         )
+    }
+    
+    deinit {
+        task?.cancel()
     }
     
 }

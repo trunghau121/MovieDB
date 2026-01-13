@@ -9,7 +9,7 @@ import Foundation
 import SwiftUICore
 import Combine
 
-class SearchViewModel: BaseViewModel<HomeNavigationEvent> {
+class SearchViewModel: BaseViewModel {
     @Published var state: CollectionLoadingState<[Movie]> = .loading(placeholder: [])
     private let repository = MovieRepositoryImp()
     private var searchUseCase: SearchUseCase
@@ -52,10 +52,6 @@ class SearchViewModel: BaseViewModel<HomeNavigationEvent> {
                 self.state = .error(error)
             }
         )
-    }
-    
-    func didSelect(_ movieId: Int) {
-        navigate(.openDetail(movieId: movieId))
     }
     
     deinit {

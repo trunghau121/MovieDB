@@ -10,101 +10,74 @@ import SwiftUICore
 import SwiftUI
 
 struct RootScreen: View {
-    @StateObject var router = NavigationRouter.shared
     @StateObject var localizableManager = LocalizableManager.shared
     @State var showSlideMenu = false
     @State var selectedSlideMenu = 0
+    @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                ZStack(alignment: .top) {
-                    // Slide Menu
-                    SlideMenuView(
-                        selectedTabMenu: $selectedSlideMenu,
-                        showSlideMenu: $showSlideMenu
-                    )
-                    
-                    shaddowViews(scale: 0.62, offsetWidth: 220)
-                    shaddowViews(scale: 0.66, offsetWidth: 195)
-                    
-                    Group {
-                        switch(selectedSlideMenu) {
-                        case 1:
-                            // Favorite screen
-                            FavoriteScreen(showSlideMenu: $showSlideMenu)
-                                .environmentObject(router)
-                        case 2:
-                            // Settings screen
-                            SettingsScreen(showSlideMenu: $showSlideMenu)
-                                .environmentObject(router)
-                                .environmentObject(localizableManager)
-                        case 3:
-                            // Feedback screen
-                            FeedbackScreen(showSlideMenu: $showSlideMenu)
-                                .environmentObject(router)
-                        case 4:
-                            // About screen
-                            AboutScreen(showSlideMenu: $showSlideMenu)
-                                .environmentObject(router)
-                        default:
-                            // Home screen
-                            HomeScreen(showSlideMenu: $showSlideMenu)
-                                .environmentObject(router)
-                        }
-                    }
-                    .ignoresSafeArea()
-                    .disabled(showSlideMenu)
-                    .overlay(
-                        MainHeader(
-                            showSlideMenu: $showSlideMenu,
-                            forceWhite: Binding<Bool>(
-                                get: {
-                                    return selectedSlideMenu == 0
-                                },
-                                set: { _ in }
-                            ),
-                            openMenu: {
-                                withAnimation(.spring()) {
-                                    showSlideMenu.toggle()
-                                }
-                            },
-                            openSearch: {
-                                router.push(MovieDBRoute.search)
-                            }
-                        ),
-                        alignment: .topLeading
-                    )
-                }
-                
-                // Handle push screen
-                NavigationLink(
-                    destination: nextView,
-                    isActive: Binding(
-                        get: { !router.path.isEmpty },
-                        set: { isActive in
-                            if !isActive {
-                                router.pop()
-                            }
-                        }
-                    )
-                ) {
-                    EmptyView()
-                }
-            }
+        ZStack(alignment: .top) {
+            // Slide Menu
+            SlideMenuView(
+                selectedTabMenu: $selectedSlideMenu,
+                showSlideMenu: $showSlideMenu
+            )
+            
+            shaddowViews(scale: 0.62, offsetWidth: 220)
+            shaddowViews(scale: 0.66, offsetWidth: 195)
+            
+            mainViews()
         }
+        .navigationBarHidden(true)
     }
     
-    @ViewBuilder
-    private var nextView: some View {
-        if let route = router.path.last {
-            route
-                .build()
-                .environmentObject(router)
-                .navigationBarBackButtonHidden(true)
-        } else {
-            EmptyView()
+    private func mainViews() -> some View {
+        Group {
+            switch(selectedSlideMenu) {
+            case 1:
+                // Favorite screen
+                FavoriteScreen(showSlideMenu: $showSlideMenu)
+                    .environmentObject(localizableManager)
+            case 2:
+                // Settings screen
+                SettingsScreen(showSlideMenu: $showSlideMenu)
+                    .environmentObject(localizableManager)
+            case 3:
+                // Feedback screen
+                FeedbackScreen(showSlideMenu: $showSlideMenu)
+                    .environmentObject(localizableManager)
+            case 4:
+                // About screen
+                AboutScreen(showSlideMenu: $showSlideMenu)
+                    .environmentObject(localizableManager)
+            default:
+                // Home screen
+                HomeScreen(showSlideMenu: $showSlideMenu)
+                    .environmentObject(localizableManager)
+            }
         }
+        .ignoresSafeArea()
+        .disabled(showSlideMenu)
+        .overlay(
+            MainHeader(
+                showSlideMenu: $showSlideMenu,
+                forceWhite: Binding<Bool>(
+                    get: {
+                        return selectedSlideMenu == 0
+                    },
+                    set: { _ in }
+                ),
+                openMenu: {
+                    withAnimation(.spring()) {
+                        showSlideMenu.toggle()
+                    }
+                },
+                openSearch: {
+                    coordinator.show(MapRouter.search)
+                }
+            ),
+            alignment: .topLeading
+        )
     }
     
     @ViewBuilder

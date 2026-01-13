@@ -29,7 +29,7 @@ struct SlideMenuView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.top, 100)
-        .background(.slideMenu)
+        .background(Color.slideMenu)
     }
     
     private func RowView(isSelected: Bool, icon: String, title: String, action: @escaping (() -> ())) -> some View {
@@ -54,7 +54,7 @@ struct SlideMenuView: View {
                     Spacer()
                 }
                 .frame(width: 200, height: 50)
-                .background(isSelected ? .selectedSlideMenu : .slideMenu)
+                .background(isSelected ? Color.selectedSlideMenu : Color.slideMenu)
                 .clipShape(
                     RoundedCornersShape(
                         radius: 15,

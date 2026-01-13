@@ -10,4 +10,8 @@ public struct Constants {
     public static let timeoutIntervalForRequest = 60.0
     public static let httpMaximumConnectionsPerHost = 5
     
+    static let defaultDuration: Double = 0.2
+    static let popupDuration: Double = 0.3
+    static let transistionDuration: Double = 0.207
+    
 }

@@ -12,7 +12,7 @@ struct AboutScreen: View {
     
     var body: some View {
         ZStack {
-            Color.cyan
+            Color.green
                 .ignoresSafeArea()
             
             Text(AppText.aboutMenu.localized())

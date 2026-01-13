@@ -13,7 +13,7 @@ struct DetailScreen: View {
     private let containerWidth: CGFloat = UIScreen.main.bounds.width
     @StateObject var viewModel = DetailViewModel()
     private let movieId: Int
-    @EnvironmentObject var router: NavigationRouter
+    @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     init(movieId: Int) {
         self.movieId = movieId
@@ -61,7 +61,7 @@ struct DetailScreen: View {
             DetailHeader(
                 isFavorius: true,
                 onBack: {
-                    router.pop()
+                    coordinator.pop()
                 },
                 onFavorius: {
                     

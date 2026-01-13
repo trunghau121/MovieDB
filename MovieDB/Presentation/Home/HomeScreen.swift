@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     private let containerHeight: CGFloat = UIScreen.main.bounds.height
     @StateObject var viewModel = HomeViewModel()
-    @EnvironmentObject var router: NavigationRouter
+    @EnvironmentObject var coordinator: Coordinator<MapRouter>
     @State var movieScrollVisible: Movie? = nil
     @Binding var showSlideMenu: Bool
     
@@ -28,9 +28,6 @@ struct HomeScreen: View {
             }
         }
         .animationOpenCloseSlideMenu(showSlideMenu)
-        .onReceive(viewModel.navigation) { event in
-            handleNavigation(event)
-        }
     }
     
     @ViewBuilder
@@ -41,21 +38,21 @@ struct HomeScreen: View {
             
             CollectionLoadingView(loadingState: viewModel.trendingState) { movies in
                 CarouselMovie(movies: movies, movieScrollVisible: $movieScrollVisible) { movieId in
-                    viewModel.didSelect(movieId)
+                    coordinator.show(MapRouter.detail(movieId: movieId))
                 }
             } empty: {
                 ZStack {
                     AppEmptyView()
                 }
                 .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
-                .background(.red)
+                .background(Color.red)
                 .clipShape(RoundedCornersShape(radius: 15))
             } error: { error in
                 ZStack {
                     ErrorView(message: error.getErrorMessage())
                 }
                 .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
-                .background(.red)
+                .background(Color.red)
                 .clipShape(RoundedCornersShape(radius: 15))
             }
             .onAppear {
@@ -63,7 +60,7 @@ struct HomeScreen: View {
             }
 
             MovieTabbed(viewModel: viewModel) { movieId in
-                viewModel.didSelect(movieId)
+                coordinator.show(MapRouter.detail(movieId: movieId))
             }
         }.onReceive(viewModel.$trendingState) { state in
             if case let .loaded(movies) = state {
@@ -71,16 +68,6 @@ struct HomeScreen: View {
             } else if case let .loading(placeholder) = state {
                 movieScrollVisible = placeholder.first
             }
-        }
-    }
-    
-    
-    private func handleNavigation(_ event: HomeNavigationEvent) {
-        switch event {
-        case .openDetail(let movieId):
-            // Move to Detail screen
-            router.push(MovieDBRoute.detail(movieId: movieId))
-            break
         }
     }
 }

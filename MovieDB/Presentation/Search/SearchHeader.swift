@@ -26,7 +26,7 @@ struct SearchHeader: View {
                 .foregroundColor(.textApp)
                 .padding(.horizontal, 15)
                 .padding(.vertical, 10)
-                .background(.gray.opacity(0.3))
+                .background(Color.gray.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding(.leading, 5)
         }
