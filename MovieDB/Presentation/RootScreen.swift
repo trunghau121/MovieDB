@@ -28,6 +28,7 @@ struct RootScreen: View {
             
             mainViews()
         }
+        .ignoresSafeArea()
         .navigationBarHidden(true)
     }
     

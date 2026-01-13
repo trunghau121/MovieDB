@@ -25,7 +25,9 @@ struct SearchScreen: View {
                             ForEach(movies, id: \.id) { movie in
                                 ItemSearch(movie: movie)
                                     .onTapGesture {
-                                        coordinator.show(.detail(movieId: movie.id))
+                                        if movie.id > 0 {
+                                            coordinator.show(MapRouter.detail(movieId: movie.id))
+                                        }
                                     }
                             }
                         }

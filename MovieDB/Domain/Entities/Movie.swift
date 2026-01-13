@@ -24,9 +24,9 @@ public struct Movie: Identifiable, Hashable {
         self.overview = overview
     }
     
-    static let placeholder: [Self] = (0..<10).map { index in
+    static let placeholder: [Self] = (1..<11).map { index in
         .init(
-            id: index,
+            id: -1 * index,
             title: "                               ",
             backdropPath: "",
             posterPath: "",

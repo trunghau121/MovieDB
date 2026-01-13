@@ -28,7 +28,7 @@ struct SlideMenuView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.top, 100)
+        .padding(.top, 170)
         .background(Color.slideMenu)
     }
     

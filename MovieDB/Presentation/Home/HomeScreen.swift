@@ -38,7 +38,9 @@ struct HomeScreen: View {
             
             CollectionLoadingView(loadingState: viewModel.trendingState) { movies in
                 CarouselMovie(movies: movies, movieScrollVisible: $movieScrollVisible) { movieId in
-                    coordinator.show(MapRouter.detail(movieId: movieId))
+                    if movieId > 0 {
+                        coordinator.show(MapRouter.detail(movieId: movieId))
+                    }
                 }
             } empty: {
                 ZStack {
@@ -60,7 +62,9 @@ struct HomeScreen: View {
             }
 
             MovieTabbed(viewModel: viewModel) { movieId in
-                coordinator.show(MapRouter.detail(movieId: movieId))
+                if movieId > 0 {
+                    coordinator.show(MapRouter.detail(movieId: movieId))
+                }
             }
         }.onReceive(viewModel.$trendingState) { state in
             if case let .loaded(movies) = state {
