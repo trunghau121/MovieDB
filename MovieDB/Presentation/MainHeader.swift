@@ -48,7 +48,7 @@ struct MainHeader: View {
             } else {
                 Text(title)
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.textApp)
+                    .foregroundColor(getColor())
                     .shadow(radius: 5, x: 5, y: 5)
                 Spacer()
             }

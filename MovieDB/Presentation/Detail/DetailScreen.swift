@@ -14,6 +14,8 @@ struct DetailScreen: View {
     @StateObject var viewModel = DetailViewModel()
     private let movieId: Int
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
+    @ObservedObject var movieManager: MovieManager = .shared
+    @State var isFavorite: Bool = false
     
     init(movieId: Int) {
         self.movieId = movieId
@@ -59,18 +61,27 @@ struct DetailScreen: View {
         }
         .overlay(
             DetailHeader(
-                isFavorius: true,
+                isFavorius: isFavorite,
                 onBack: {
                     coordinator.pop()
                 },
                 onFavorius: {
-                    
+                    if case .loaded(let movie) = viewModel.state {
+                        let isFavorite = movieManager.isFavorite(movieId: movieId)
+                        if isFavorite {
+                            movieManager.remove(movie: movie)
+                        } else {
+                            movieManager.save(movie: movie)
+                        }
+                        self.isFavorite = !isFavorite
+                    }
                 }
             ),
             alignment: .top
         )
         .ignoresSafeArea()
         .onAppear {
+            isFavorite = movieManager.isFavorite(movieId: movieId)
             viewModel.getMovieDetail(movieId: movieId)
         }
         .statusBarHidden(true)

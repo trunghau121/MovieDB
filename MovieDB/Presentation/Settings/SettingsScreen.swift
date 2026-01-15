@@ -38,10 +38,6 @@ struct SettingsScreen: View {
                     }
                 }
             }
-            
-            Text(AppText.settingMenu.localized())
-                .font(.title2)
-                .padding()
         }
         .applyPaddingStatusBar()
         .animationOpenCloseSlideMenu(showSlideMenu)
