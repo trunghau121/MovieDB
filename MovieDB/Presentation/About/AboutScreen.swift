@@ -11,12 +11,17 @@ struct AboutScreen: View {
     @Binding var showSlideMenu: Bool
     
     var body: some View {
-        ZStack {
-            Color.green
-                .ignoresSafeArea()
-            
-            Text(AppText.aboutMenu.localized())
-                .font(.title)
+        ZStack (alignment: .top) {
+            Color.backgroundApp.ignoresSafeArea()
+            ScrollView {
+                Text(AppText.aboutApp.localized())
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.textApp)
+                    .padding(.top, 10)
+            }
+            .applyPaddingStatusBar()
+            .padding()
+            .padding(.top, 40)
         }
         .animationOpenCloseSlideMenu(showSlideMenu)
     }

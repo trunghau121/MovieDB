@@ -39,4 +39,8 @@ public struct AppText {
     // Search
     static let hintSearch = "hint_search"
     // End
+    
+    // About
+    static let aboutApp = "about_app"
+    // End
 }

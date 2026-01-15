@@ -13,6 +13,7 @@ struct RootScreen: View {
     @StateObject var localizableManager = LocalizableManager.shared
     @State var showSlideMenu = false
     @State var selectedSlideMenu = 0
+    @State var title: String = AppText.homeMenu
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     var body: some View {
@@ -68,6 +69,7 @@ struct RootScreen: View {
                     },
                     set: { _ in }
                 ),
+                title: getTitle(),
                 openMenu: {
                     withAnimation(.spring()) {
                         showSlideMenu.toggle()
@@ -79,6 +81,26 @@ struct RootScreen: View {
             ),
             alignment: .topLeading
         )
+    }
+    
+    private func getTitle() -> String {
+        switch(selectedSlideMenu) {
+        case 1:
+            // Favorite screen
+            AppText.favoriteMenu.localized()
+        case 2:
+            // Settings screen
+            AppText.settingMenu.localized()
+        case 3:
+            // Feedback screen
+            AppText.feedbackMenu.localized()
+        case 4:
+            // About screen
+            AppText.aboutMenu.localized()
+        default:
+            // Home screen
+            AppText.homeMenu.localized()
+        }
     }
     
     @ViewBuilder

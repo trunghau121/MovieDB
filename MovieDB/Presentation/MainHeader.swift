@@ -10,6 +10,7 @@ import SwiftUI
 struct MainHeader: View {
     @Binding var showSlideMenu: Bool
     @Binding var forceWhite: Bool
+    var title: String
     var openMenu: (() -> Void)
     var openSearch: (() -> Void)
     
@@ -44,6 +45,12 @@ struct MainHeader: View {
             if showSlideMenu {
                 Image(AppIcon.horizontalLogo)
                 Spacer()
+            } else {
+                Text(title)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.textApp)
+                    .shadow(radius: 5, x: 5, y: 5)
+                Spacer()
             }
             
             Button {
@@ -74,10 +81,12 @@ struct MainHeader_Previews: PreviewProvider {
     struct ContainerView: View {
         @State var forceWhite: Bool = false
         @State var showSlideMenu: Bool = false
+        private var title: String = AppText.homeMenu
         var body: some View {
             MainHeader(
                 showSlideMenu: $showSlideMenu,
                 forceWhite: $forceWhite,
+                title: title,
                 openMenu: {
                     withAnimation(.spring()) {
                         showSlideMenu.toggle()

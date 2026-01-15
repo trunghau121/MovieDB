@@ -4,6 +4,23 @@
     "%lld" : {
 
     },
+    "about_app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MTDB, or The Movie Database, refers to a popular, community-built online database for movies, TV shows, and actors, often used by developers via its public API, while also existing as dedicated apps (like the Amazon Appstore's \"MTDB The Movie Database\") or WordPress themes for building movie sites, offering rich metadata, trailers, and community features for entertainment enthusiasts and developers alike. It's distinct from IMDb but serves similar functions, providing extensive film and celebrity info. \n\nKey Aspects of MTDB (The Movie Database):\nComprehensive Data: Offers vast information on movies, TV series, actors, directors, with images, trailers, and plot details.\n\nCommunity-Driven: Relies on user contributions to build and maintain its database.\nDeveloper Friendly: Provides a powerful API (Application Programming Interface) for developers to integrate movie data into their own apps and services.\n\nUser Features: Allows users to create watchlists, track seen movies, discover new content, and connect with other fans.\nVariations: Can refer to the core TMDB platform, dedicated apps (like the Amazon one for ad-free viewing), or themes/scripts (like WordPress plugins) for creating similar sites. \n\nIn essence: MTDB (or TMDB) is a go-to resource for movie lovers and tech creators, acting as a central hub for film and TV data, much like its well-known counterpart, IMDb."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MTDB, hay The Movie Database, là một cơ sở dữ liệu trực tuyến phổ biến, được cộng đồng xây dựng, dành cho phim ảnh, chương trình truyền hình và diễn viên. Cơ sở dữ liệu này thường được các nhà phát triển sử dụng thông qua API công khai của nó, đồng thời cũng tồn tại dưới dạng các ứng dụng chuyên dụng (như \"MTDB The Movie Database\" trên Amazon Appstore) hoặc các giao diện WordPress để xây dựng các trang web về phim, cung cấp siêu dữ liệu phong phú, đoạn giới thiệu phim và các tính năng cộng đồng dành cho cả những người đam mê giải trí và các nhà phát triển. Nó khác với IMDb nhưng có chức năng tương tự, cung cấp thông tin phim và người nổi tiếng một cách đầy đủ.\n\nCác khía cạnh chính của MTDB (The Movie Database):\nDữ liệu toàn diện: Cung cấp thông tin khổng lồ về phim ảnh, phim truyền hình, diễn viên, đạo diễn, với hình ảnh, đoạn giới thiệu phim và chi tiết cốt truyện.\n\nĐược cộng đồng thúc đẩy: Dựa vào sự đóng góp của người dùng để xây dựng và duy trì cơ sở dữ liệu.\n\nThân thiện với nhà phát triển: Cung cấp API (Giao diện lập trình ứng dụng) mạnh mẽ cho các nhà phát triển để tích hợp dữ liệu phim vào các ứng dụng và dịch vụ của riêng họ.\n\nTính năng dành cho người dùng: Cho phép người dùng tạo danh sách xem, theo dõi phim đã xem, khám phá nội dung mới và kết nối với những người hâm mộ khác. Các biến thể: Có thể đề cập đến nền tảng TMDB cốt lõi, các ứng dụng chuyên dụng (như ứng dụng của Amazon để xem không có quảng cáo), hoặc các giao diện/script (như plugin WordPress) để tạo các trang web tương tự.\nVề bản chất: MTDB (hoặc TMDB) là nguồn tài nguyên thiết yếu cho những người yêu thích phim ảnh và các nhà sáng tạo công nghệ, hoạt động như một trung tâm dữ liệu về phim và truyền hình, tương tự như người anh em nổi tiếng của nó, IMDb."
+          }
+        }
+      }
+    },
     "about_menu" : {
       "extractionState" : "manual",
       "localizations" : {
