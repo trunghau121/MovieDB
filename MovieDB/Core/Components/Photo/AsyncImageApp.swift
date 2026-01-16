@@ -21,13 +21,13 @@ struct AsyncImageApp: View {
             if let url = imageURL {
                 RemoteImage(url: url)
             } else {
-                placeholder
+                error
             }
         }
     }
     
     @ViewBuilder
-    private var placeholder: some View {
+    private var error: some View {
         Color.gray.opacity(0.2)
             .overlay(
                 Image(systemName: "photo")
