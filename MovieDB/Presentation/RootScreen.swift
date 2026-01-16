@@ -15,6 +15,7 @@ struct RootScreen: View {
     @State var selectedSlideMenu = 0
     @State var title: String = AppText.homeMenu
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
+    private let width = UIScreen.main.bounds.width / 1.8
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -24,8 +25,8 @@ struct RootScreen: View {
                 showSlideMenu: $showSlideMenu
             )
             
-            shaddowViews(scale: 0.62, offsetWidth: 220)
-            shaddowViews(scale: 0.66, offsetWidth: 195)
+            shaddowViews(scale: 0.62, offsetWidth: width)
+            shaddowViews(scale: 0.66, offsetWidth: width - 25)
             
             mainViews()
         }

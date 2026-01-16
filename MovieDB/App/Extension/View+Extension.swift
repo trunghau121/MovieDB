@@ -13,7 +13,7 @@ extension View {
             .background(Color.backgroundApp)
             .cornerRadius(isShowMenu ? 15 : 0)
             .scaleEffect(isShowMenu ? 0.70 : 1)
-            .offset(x: isShowMenu ? UIScreen.main.bounds.width - 170 : 0)
+            .offset(x: isShowMenu ? UIScreen.main.bounds.width - (UIScreen.main.bounds.width / 1.8) + 50 : 0)
             .shadow(color: .shadowApp.opacity(isShowMenu ? 0.3 : 0), radius: isShowMenu ? 15 : 0, x: isShowMenu ? -5 : 0, y: 0)
             .ignoresSafeArea()
     }
