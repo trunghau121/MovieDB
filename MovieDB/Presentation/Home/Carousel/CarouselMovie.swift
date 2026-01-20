@@ -10,9 +10,10 @@ import SwiftUI
 struct CarouselMovie: View {
     private let containerWidth: CGFloat = UIScreen.main.bounds.width
     private let containerHeight: CGFloat = UIScreen.main.bounds.height
+    var namespaceId: Namespace.ID
     var movies: [Movie]
     @Binding var movieScrollVisible: Movie?
-    var moveToDetail: ((Int) -> Void)
+    var moveToDetail: ((Movie) -> Void)
     let spacing: CGFloat = 20
     let trailingSpace: CGFloat = 180
     @State private var currentIndex: Int = 0
@@ -25,7 +26,7 @@ struct CarouselMovie: View {
             let ajustMenWidth: CGFloat = (trailingSpace / 2) - spacing
             HStack(spacing: spacing) {
                 ForEach(movies.indices, id: \.self) { index in
-                    carouselItem(index: index, width: itemWidth)
+                    carouselItem(index: index, namespaceId: namespaceId, width: itemWidth)
                         .frame(width: itemWidth)
                         .scaleEffect(1.0 - abs(distance(index)) * 0.2 )
                 }
@@ -57,22 +58,24 @@ struct CarouselMovie: View {
     
     
     
-    private func carouselItem(index: Int, width: CGFloat) -> some View {
+    private func carouselItem(index: Int, namespaceId: Namespace.ID, width: CGFloat) -> some View {
         VStack(spacing: 10) {
             AsyncImageApp(url: movies[index].posterPath)
             .background(Color.gray)
             .frame(width: width, height: containerHeight *  0.37)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: .shadowApp.opacity(0.2), radius: 10, x: 5, y: 0)
+            .matchedGeometryEffect(id: movies[index].id, in: namespaceId)
             
             Text(movies[index].title)
                 .font(.system(size: 16, weight: .semibold))
                 .lineLimit(1)
                 .foregroundColor(.textApp)
                 .opacity(1.0 - abs(distance(index)) * 1)
+                .matchedGeometryEffect(id: "title \(movies[index].id)", in: namespaceId, properties: .position)
         }
         .onTapGesture {
-            moveToDetail(movies[index].id)
+            moveToDetail(movies[index])
         }
     }
 }

@@ -16,6 +16,7 @@ struct RootScreen: View {
     @State var title: String = AppText.homeMenu
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
     private let width = UIScreen.main.bounds.width / 1.8
+    @State var movie: Movie? = nil
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -29,9 +30,40 @@ struct RootScreen: View {
             shaddowViews(scale: 0.66, offsetWidth: width - 25)
             
             mainViews()
+                .overlay(
+                    mainHeaderView(),
+                    alignment: .topLeading
+                )
         }
         .ignoresSafeArea()
         .navigationBarHidden(true)
+    }
+    
+    private func mainHeaderView() -> some View {
+        Group {
+            if movie == nil {
+                MainHeader(
+                    showSlideMenu: $showSlideMenu,
+                    forceWhite: Binding<Bool>(
+                        get: {
+                            return selectedSlideMenu == 0
+                        },
+                        set: { _ in }
+                    ),
+                    title: getTitle(),
+                    openMenu: {
+                        withAnimation(.spring()) {
+                            showSlideMenu.toggle()
+                        }
+                    },
+                    openSearch: {
+                        coordinator.show(MapRouter.search)
+                    }
+                )
+            } else {
+                EmptyView()
+            }
+        }
     }
     
     private func mainViews() -> some View {
@@ -39,7 +71,7 @@ struct RootScreen: View {
             switch(selectedSlideMenu) {
             case 1:
                 // Favorite screen
-                FavoriteScreen(showSlideMenu: $showSlideMenu)
+                FavoriteScreen(showSlideMenu: $showSlideMenu, movie: $movie)
                     .environmentObject(localizableManager)
             case 2:
                 // Settings screen
@@ -55,33 +87,12 @@ struct RootScreen: View {
                     .environmentObject(localizableManager)
             default:
                 // Home screen
-                HomeScreen(showSlideMenu: $showSlideMenu)
+                HomeScreen(movie: $movie, showSlideMenu: $showSlideMenu)
                     .environmentObject(localizableManager)
             }
         }
         .ignoresSafeArea()
         .disabled(showSlideMenu)
-        .overlay(
-            MainHeader(
-                showSlideMenu: $showSlideMenu,
-                forceWhite: Binding<Bool>(
-                    get: {
-                        return selectedSlideMenu == 0
-                    },
-                    set: { _ in }
-                ),
-                title: getTitle(),
-                openMenu: {
-                    withAnimation(.spring()) {
-                        showSlideMenu.toggle()
-                    }
-                },
-                openSearch: {
-                    coordinator.show(MapRouter.search)
-                }
-            ),
-            alignment: .topLeading
-        )
     }
     
     private func getTitle() -> String {

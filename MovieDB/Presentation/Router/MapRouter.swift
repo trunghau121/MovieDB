@@ -9,7 +9,6 @@ import SwiftUI
 
 public enum MapRouter: NavigationRouter {
     case main
-    case detail(movieId: Int)
     case search
     
     public var transition: NavigationTranisitionStyle {
@@ -17,8 +16,6 @@ public enum MapRouter: NavigationRouter {
             case .main:
                 return .push
             case .search:
-                return .push
-            case .detail:
                 return .push
             }
         }
@@ -28,8 +25,6 @@ public enum MapRouter: NavigationRouter {
         switch self {
         case .main:
             RootScreen()
-        case .detail(let movieId):
-            DetailScreen(movieId: movieId)
         case .search:
             SearchScreen()
         }

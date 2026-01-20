@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MovieTabbed: View {
+    var namespaceId: Namespace.ID
     @ObservedObject var viewModel: HomeViewModel
-    var moveToDetail: ((Int) -> Void)
+    var moveToDetail: ((Movie) -> Void)
     
     var body: some View {
         WithTabBar { selection in
             CollectionLoadingView(loadingState: viewModel.movieTabState) { movies in
-                MovieTabView(movies: movies, moveToDetail: moveToDetail)
+                MovieTabView(namespaceId: namespaceId, movies: movies, moveToDetail: moveToDetail)
             } empty: {
                 AppEmptyView()
             } error: { error in

@@ -11,46 +11,56 @@ struct SearchScreen: View {
     private let containerHeight: CGFloat = UIScreen.main.bounds.height
     @StateObject var viewModel = SearchViewModel()
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
+    @State var movie: Movie? = nil
+    @Namespace var namespaceId
     
     var body: some View {
-        VStack {
-            SearchHeader(text: $viewModel.query) {
-                coordinator.pop()
-            }
-            CollectionLoadingView(
-                loadingState: viewModel.state,
-                content: { movies in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack {
-                            ForEach(movies, id: \.id) { movie in
-                                ItemSearch(movie: movie)
-                                    .onTapGesture {
-                                        if movie.id > 0 {
-                                            coordinator.show(MapRouter.detail(movieId: movie.id))
+        ZStack {
+            VStack {
+                SearchHeader(text: $viewModel.query) {
+                    coordinator.pop()
+                }
+                CollectionLoadingView(
+                    loadingState: viewModel.state,
+                    content: { movies in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVStack {
+                                ForEach(movies, id: \.id) { movie in
+                                    ItemSearch(namespaceId: namespaceId, movie: movie)
+                                        .onTapGesture {
+                                            if movie.id > 0 {
+                                                withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+                                                    self.movie = movie
+                                                }
+                                            }
                                         }
-                                    }
+                                }
                             }
                         }
+                    },
+                    empty: {
+                        ZStack {
+                            AppEmptyView()
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
+                    },
+                    error: { error in
+                        ZStack {
+                            ErrorView(message: error.getErrorMessage())
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
                     }
-                },
-                empty: {
-                    ZStack {
-                        AppEmptyView()
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
-                },
-                error: { error in
-                    ZStack {
-                        ErrorView(message: error.getErrorMessage())
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
-                }
-            )
-            .frame(maxHeight: .infinity)
+                )
+                .frame(maxHeight: .infinity)
+            }
+            .applyPaddingStatusBar()
+            .background(Color.backgroundApp)
+            .ignoresSafeArea()
+            
+            if movie != nil {
+                DetailScreen(movie: $movie, namespaceId: namespaceId)
+            }
         }
-        .applyPaddingStatusBar()
-        .background(Color.backgroundApp)
-        .ignoresSafeArea()
     }
 }
 

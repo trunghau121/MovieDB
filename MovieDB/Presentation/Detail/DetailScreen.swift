@@ -12,26 +12,24 @@ struct DetailScreen: View {
     private let containerHeight: CGFloat = UIScreen.main.bounds.height
     private let containerWidth: CGFloat = UIScreen.main.bounds.width
     @StateObject var viewModel = DetailViewModel()
-    private let movieId: Int
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
     @ObservedObject var movieManager: MovieManager = .shared
     @State var isFavorite: Bool = false
-    
-    init(movieId: Int) {
-        self.movieId = movieId
-    }
+    @Binding var movie: Movie?
+    var namespaceId: Namespace.ID
     
     var body: some View {
-        ZStack {
-            Color.backgroundApp.ignoresSafeArea()
-            
-            CollectionLoadingView(loadingState: viewModel.state) { movie in
+        if let movie = movie {
+            ZStack {
+                Color.backgroundApp.ignoresSafeArea()
+                
                 VStack {
                     ZStack (alignment: .topLeading) {
                         AsyncImageApp(url: movie.backdropPath)
                             .background(Color.gray)
                             .frame(width: containerWidth, height: containerHeight * 0.35)
                             .clipShape(RoundedCornersShape(radius: 15,  conners: [.bottomLeft, .bottomRight]))
+                            .matchedGeometryEffect(id: movie.id, in: namespaceId)
                         
                         AsyncImageApp(url: movie.posterPath)
                             .background(Color.gray)
@@ -47,51 +45,51 @@ struct DetailScreen: View {
                             .padding(.top, (containerHeight * 0.35) + 5)
                             .padding(.leading, (containerHeight * 0.15) + 20)
                             .padding(.trailing, 10)
+                            .matchedGeometryEffect(id: "title \(movie.id)", in: namespaceId, properties: .position)
                     }
                     
                     Spacer()
                 }
-            } empty: {
-                Rectangle()
-                    .fill(Color.orange)
-            } error: { error in
-                Rectangle()
-                    .fill(Color.red)
+                .overlay(
+                    DetailHeader(
+                        isFavorius: isFavorite,
+                        onBack: {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
+                                self.movie = nil
+                            }
+                        },
+                        onFavorius: {
+                            if case .loaded(let movie) = viewModel.state {
+                                let isFavorite = movieManager.isFavorite(movieId: movie.id)
+                                if isFavorite {
+                                    movieManager.remove(movie: movie)
+                                } else {
+                                    movieManager.save(movie: movie)
+                                }
+                                self.isFavorite = !isFavorite
+                            }
+                        }
+                    ),
+                    alignment: .top
+                )
+                .ignoresSafeArea()
+                .onAppear {
+                    isFavorite = movieManager.isFavorite(movieId: movie.id)
+                    viewModel.getMovieDetail(movieId: movie.id)
+                }
+                .statusBarHidden(true)
             }
         }
-        .overlay(
-            DetailHeader(
-                isFavorius: isFavorite,
-                onBack: {
-                    coordinator.pop()
-                },
-                onFavorius: {
-                    if case .loaded(let movie) = viewModel.state {
-                        let isFavorite = movieManager.isFavorite(movieId: movieId)
-                        if isFavorite {
-                            movieManager.remove(movie: movie)
-                        } else {
-                            movieManager.save(movie: movie)
-                        }
-                        self.isFavorite = !isFavorite
-                    }
-                }
-            ),
-            alignment: .top
-        )
-        .ignoresSafeArea()
-        .onAppear {
-            isFavorite = movieManager.isFavorite(movieId: movieId)
-            viewModel.getMovieDetail(movieId: movieId)
-        }
-        .statusBarHidden(true)
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     struct ContainerView: View {
+        @State var movie: Movie? = Movie.placeholder.first
+        @Namespace var namespaceId
+        
         var body: some View {
-            DetailScreen(movieId: 12345678)
+            DetailScreen(movie: $movie, namespaceId: namespaceId)
         }
     }
     
