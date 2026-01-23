@@ -42,21 +42,11 @@ struct MovieItem: View {
     }
 }
 
-let movieMockup = Movie(
-    id: 0,
-    title: "Springsteen: Deliver Me from Nowhere",
-    backdropPath: "/7OwZxXuLPtCFjdqJdiTuEE1DE4J.jpg",
-    posterPath: "/csBV3eq4RDjNg1acNQ8kwOZyPlZ.jpg",
-    voteAverage: 7.0,
-    releaseDate: "2025-10-22",
-    overview: "Bruce Springsteen, a young musician on the cusp of global superstardom, struggles to reconcile the pressures of success with the ghosts of his past."
-)
-
 struct MovieItem_Previews: PreviewProvider {
     struct ContainerView: View {
         @Namespace var namespaceId
         var body: some View {
-            MovieItem(namespaceId: namespaceId, movie: movieMockup, height: 300)
+            MovieItem(namespaceId: namespaceId, movie: Movie.placeholder[0], height: 300)
         }
     }
     

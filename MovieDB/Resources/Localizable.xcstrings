@@ -1,8 +1,24 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
     "%lld" : {
 
+    },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
     },
     "about_app" : {
       "extractionState" : "manual",
@@ -34,6 +50,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Giới thiệu"
+          }
+        }
+      }
+    },
+    "casts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Casts"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diễn viên"
           }
         }
       }
@@ -174,6 +207,23 @@
         }
       }
     },
+    "minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutes"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phút"
+          }
+        }
+      }
+    },
     "no_data_movie" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -221,6 +271,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Phổ biến"
+          }
+        }
+      }
+    },
+    "read_less" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read less"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thu gọn"
+          }
+        }
+      }
+    },
+    "read_more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read more"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xem thêm"
           }
         }
       }

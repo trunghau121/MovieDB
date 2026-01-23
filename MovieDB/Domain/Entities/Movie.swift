@@ -13,8 +13,10 @@ public struct Movie: Identifiable, Hashable, Codable {
     public let voteAverage: Double
     public let releaseDate: String
     public let overview: String
+    public let runtime: Int
+    public let genres: [Genre]
     
-    public init(id: Int, title: String, backdropPath: String, posterPath: String, voteAverage: Double, releaseDate: String, overview: String) {
+    public init(id: Int, title: String, backdropPath: String, posterPath: String, voteAverage: Double, releaseDate: String, overview: String, runtime: Int, genres: [Genre]) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
@@ -22,6 +24,8 @@ public struct Movie: Identifiable, Hashable, Codable {
         self.voteAverage = voteAverage
         self.releaseDate = releaseDate
         self.overview = overview
+        self.runtime = runtime
+        self.genres = genres
     }
     
     static let placeholder: [Self] = (1..<11).map { index in
@@ -30,9 +34,14 @@ public struct Movie: Identifiable, Hashable, Codable {
             title: "                               ",
             backdropPath: "",
             posterPath: "",
-            voteAverage: 0.0,
-            releaseDate: "",
-            overview: ""
+            voteAverage: 6.0,
+            releaseDate: "2026-01-22",
+            overview: "Trust frays when a team of Miami cops discovers millions in cash inside a run-down stash house, calling everyone — and everything — into question.",
+            runtime: 130,
+            genres: [
+                Genre(id: 0, name: "     "),
+                Genre(id: 0, name: "     ")
+            ]
         )
     }
 }

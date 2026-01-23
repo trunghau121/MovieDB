@@ -45,11 +45,11 @@ public class MovieRepositoryImp: MovieRepository {
     }
     
     
-    public func getDetail(movideId: Int, language: String?) async throws -> Movie? {
+    public func getDetail(movieId: Int, language: String?) async throws -> Movie? {
         let query: [String: String?] = [
             "language": language
         ]
-        let dtoResult: MovieDTO = try await apiClient.request(APIPath.Detail(movieId: movideId), query: query)
+        let dtoResult: MovieDTO = try await apiClient.request(APIPath.Detail(movieId: movieId), query: query)
         return dtoResult.toDomain()
     }
     
@@ -59,6 +59,14 @@ public class MovieRepositoryImp: MovieRepository {
             "language": language
         ]
         let dtoResult: MovieListDTO = try await apiClient.request(APIPath.Search, query: query)
+        return dtoResult.toDomain()
+    }
+    
+    public func getCastCrew(movieId: Int, language: String?) async throws -> [Cast] {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: CastListDTO = try await apiClient.request(APIPath.CastCrew(movieId: movieId), query: query)
         return dtoResult.toDomain()
     }
 }

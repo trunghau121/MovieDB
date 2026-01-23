@@ -29,7 +29,7 @@ struct SearchScreen: View {
                                     ItemSearch(namespaceId: namespaceId, movie: movie)
                                         .onTapGesture {
                                             if movie.id > 0 {
-                                                withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+                                                withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                                                     self.movie = movie
                                                 }
                                             }

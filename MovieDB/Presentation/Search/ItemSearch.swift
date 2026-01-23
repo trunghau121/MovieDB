@@ -35,6 +35,7 @@ struct ItemSearch: View {
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .matchedGeometryEffect(id: "overview \(movie.id)", in: namespaceId, properties: .position)
             }
             .padding(.vertical, 5)
         }
@@ -43,21 +44,11 @@ struct ItemSearch: View {
     }
 }
 
-let movieMockup1 = Movie(
-    id: 0,
-    title: "Springsteen: Deliver Me from Nowhere",
-    backdropPath: "/7OwZxXuLPtCFjdqJdiTuEE1DE4J.jpg",
-    posterPath: "/csBV3eq4RDjNg1acNQ8kwOZyPlZ.jpg",
-    voteAverage: 7.0,
-    releaseDate: "2025-10-22",
-    overview: "Bruce Springsteen, a young musician on the cusp of global superstardom, struggles to reconcile the pressures of success with the ghosts of his past."
-)
-
 struct ItemSearch_Previews: PreviewProvider {
     struct ContainerView: View {
         @Namespace var namespaceId
         var body: some View {
-            ItemSearch(namespaceId: namespaceId, movie: movieMockup)
+            ItemSearch(namespaceId: namespaceId, movie: Movie.placeholder[0])
         }
     }
     

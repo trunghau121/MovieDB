@@ -10,19 +10,22 @@ import Foundation
 
 @MainActor
 class DetailViewModel: BaseViewModel {
-    @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: .placeholder.first!)
+    @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: Movie.placeholder.first!)
+    @Published var castState: CollectionLoadingState<[Cast]> = .loading(placeholder: Cast.placeholder)
     private let repository = MovieRepositoryImp()
     private var detailUseCase: DetailUseCase
+    private var castUseCase: CastUseCase
     private var task: Task<Void, Never>? = nil
     
     override init() {
         self.detailUseCase = DetailUseCase(repository: repository)
+        self.castUseCase = CastUseCase(repository: repository)
     }
     
     func getMovieDetail(movieId: Int) {
         task = performAsyn(
             operation: {
-                try await self.repository.getDetail(movideId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
+                try await self.detailUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
             },
             onLoading: { loading in
                 if loading {
@@ -38,6 +41,29 @@ class DetailViewModel: BaseViewModel {
             },
             onError: { error in
                 self.state = .error(error)
+            }
+        )
+    }
+    
+    func getCastCrew(movieId: Int) {
+        task = performAsyn(
+            operation: {
+                try await self.castUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
+            },
+            onLoading: { loading in
+                if loading {
+                    self.castState = .loading(placeholder: Cast.placeholder)
+                }
+            },
+            onSuccess: { result in
+                if result.isEmpty {
+                    self.castState = .empty
+                } else {
+                    self.castState = .loaded(content: result)
+                }
+            },
+            onError: { error in
+                self.castState = .error(error)
             }
         )
     }

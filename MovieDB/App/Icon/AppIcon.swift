@@ -13,4 +13,5 @@ public struct AppIcon {
     static let feedback = "exclamationmark.triangle.fill"
     static let about = "questionmark.circle"
     static let menu = "menu"
+    static let iconPlay = "ic_play"
 }

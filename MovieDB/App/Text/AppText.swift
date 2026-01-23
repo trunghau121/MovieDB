@@ -43,4 +43,11 @@ public struct AppText {
     // About
     static let aboutApp = "about_app"
     // End
+    
+    // Detail
+    static let minutes = "minutes"
+    static let readMore = "read_more"
+    static let readLess = "read_less"
+    static let casts = "casts"
+    // End
 }

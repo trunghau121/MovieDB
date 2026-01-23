@@ -13,7 +13,7 @@ struct AsyncImageApp: View {
     let url: String
     
     private var imageURL: URL? {
-        return URL(string: Enviroment.photo500Url + url)
+        return URL(string: url)
     }
     
     var body: some View {

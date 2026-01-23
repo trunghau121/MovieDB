@@ -14,6 +14,8 @@ public struct MovieDTO: Codable {
     var voteAverage: Double?
     var releaseDate: String?
     var overview: String?
+    var runtime: Int?
+    var genres: [Genre]?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -23,5 +25,7 @@ public struct MovieDTO: Codable {
         case voteAverage = "vote_average"
         case releaseDate = "release_date"
         case overview = "overview"
+        case runtime = "runtime"
+        case genres = "genres"
     }
 }

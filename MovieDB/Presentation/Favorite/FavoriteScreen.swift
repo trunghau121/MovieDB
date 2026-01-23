@@ -52,7 +52,7 @@ struct FavoriteScreen: View {
                                     .shadow(radius: 5, x: 5, y: 5)
                             }
                         }.onTapGesture {
-                            withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                                 self.movie = movie
                             }
                         }

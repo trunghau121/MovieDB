@@ -44,7 +44,7 @@ struct HomeScreen: View {
                 CollectionLoadingView(loadingState: viewModel.trendingState) { movies in
                     CarouselMovie(namespaceId: namespaceIdCarousel, movies: movies, movieScrollVisible: $movieScrollVisible) { movie in
                         if movie.id > 0 {
-                            withAnimation {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                                 activateNamespace = namespaceIdCarousel
                                 self.movie = movie
                             }
@@ -71,7 +71,7 @@ struct HomeScreen: View {
                 
                 MovieTabbed(namespaceId: namespaceId, viewModel: viewModel) { movie in
                     if movie.id > 0 {
-                        withAnimation {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                             activateNamespace = namespaceId
                             self.movie = movie
                         }

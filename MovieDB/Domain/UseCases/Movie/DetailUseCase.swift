@@ -13,6 +13,6 @@ final class DetailUseCase {
     }
     
     public func execute(movieId: Int, language: String?) async throws -> Movie? {
-        try await repository.getDetail(movideId: movieId, language: language)
+        try await repository.getDetail(movieId: movieId, language: language)
     }
 }

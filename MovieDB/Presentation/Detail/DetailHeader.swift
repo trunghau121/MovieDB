@@ -27,7 +27,7 @@ struct DetailHeader: View {
             Button {
                 onFavorius()
             } label: {
-                Image(systemName: isFavorius ? "heart.fill" : "heart")
+                Image(systemName: "heart.fill")
                     .foregroundColor(isFavorius ? .red : .white)
                     .font(.title2)
                     .shadow(radius: 5, x: 5, y: 5)
