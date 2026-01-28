@@ -55,3 +55,28 @@ extension CastListDTO {
         }
     }
 }
+
+extension TrailerDTO {
+    func toDomain() -> Trailer {
+        return Trailer(
+            id: self.id ?? "",
+            iso31661: self.iso31661 ?? "",
+            iso6391: self.iso6391 ?? "",
+            key: self.key ?? "",
+            name: self.name ?? "",
+            official: self.official ?? false,
+            publishedAt: self.publishedAt ?? "",
+            site: self.site ?? "",
+            size: self.size ?? 0,
+            type: self.type ?? ""
+        )
+    }
+}
+
+extension TrailerListDTO {
+    func toDomain() -> [Trailer] {
+        (videos ?? []).map {
+            $0.toDomain()
+        }
+    }
+}

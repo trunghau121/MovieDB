@@ -21,7 +21,8 @@ struct DetailHeader: View {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.white)
                     .font(.title2)
-                    .shadow(radius: 5, x: 5, y: 5)
+                    .shadow(radius: 7, x: 7, y: 7)
+                    .padding(5)
             }
             Spacer()
             Button {
@@ -30,7 +31,8 @@ struct DetailHeader: View {
                 Image(systemName: "heart.fill")
                     .foregroundColor(isFavorius ? .red : .white)
                     .font(.title2)
-                    .shadow(radius: 5, x: 5, y: 5)
+                    .shadow(radius: 7, x: 7, y: 7)
+                    .padding(5)
             }
         }
         .applyPaddingStatusBar()

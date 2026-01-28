@@ -69,4 +69,12 @@ public class MovieRepositoryImp: MovieRepository {
         let dtoResult: CastListDTO = try await apiClient.request(APIPath.CastCrew(movieId: movieId), query: query)
         return dtoResult.toDomain()
     }
+    
+    public func getTrailerVideos(movieId: Int, language: String?) async throws -> [Trailer] {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: TrailerListDTO = try await apiClient.request(APIPath.TrailerVideos(movieId: movieId), query: query)
+        return dtoResult.toDomain()
+    }
 }

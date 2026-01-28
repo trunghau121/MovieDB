@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC49CB6E2EF8EC59007AFBA7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EC49CB6D2EF8EC59007AFBA7 /* Kingfisher */; };
+		ECD1197E2F286FC500FE7622 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = ECD1197D2F286FC500FE7622 /* YouTubePlayerKit */; };
 		ECDDEF2E2EA8898B00C65F79 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ECDDEF2C2EA8898B00C65F79 /* Staging.xcconfig */; };
 		ECDDEF2F2EA8898B00C65F79 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ECDDEF2A2EA8898B00C65F79 /* Development.xcconfig */; };
 		ECDDEF302EA8898B00C65F79 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ECDDEF2B2EA8898B00C65F79 /* Production.xcconfig */; };
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECD1197E2F286FC500FE7622 /* YouTubePlayerKit in Frameworks */,
 				EC49CB6E2EF8EC59007AFBA7 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +243,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				EC49CB6C2EF8EB60007AFBA7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				ECD1197C2F286FC500FE7622 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ECDDEF012EA8893900C65F79 /* Products */;
@@ -464,7 +467,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -501,7 +504,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,7 +680,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -786,6 +789,14 @@
 				minimumVersion = 8.6.2;
 			};
 		};
+		ECD1197C2F286FC500FE7622 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -793,6 +804,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC49CB6C2EF8EB60007AFBA7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		ECD1197D2F286FC500FE7622 /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECD1197C2F286FC500FE7622 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

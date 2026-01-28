@@ -13,4 +13,5 @@ public protocol MovieRepository {
     func getDetail(movieId: Int, language: String?) async throws -> Movie?
     func didSearch(query: String, language: String?) async throws -> [Movie]
     func getCastCrew(movieId: Int, language: String?) async throws -> [Cast]
+    func getTrailerVideos(movieId: Int, language: String?) async throws -> [Trailer]
 }

@@ -343,6 +343,9 @@
         }
       }
     },
+    "Trailer: %@" : {
+
+    },
     "unknown_error" : {
       "extractionState" : "manual",
       "localizations" : {

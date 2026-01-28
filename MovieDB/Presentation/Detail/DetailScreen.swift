@@ -33,7 +33,7 @@ struct DetailScreen: View {
                                     .matchedGeometryEffect(id: movie.id, in: namespaceId)
                                 
                                 Button {
-                                    
+                                    coordinator.show(MapRouter.trailer(movie: movie))
                                 } label: {
                                     Image(AppIcon.iconPlay)
                                         .scaledToFit()
@@ -56,7 +56,7 @@ struct DetailScreen: View {
                                     .matchedGeometryEffect(id: "title \(movie.id)", in: namespaceId, properties: .position)
                                 VotesView(rating: movie.voteAverage)
                             }
-                            .padding(.top, (containerHeight * 0.35) + 5)
+                            .padding(.top, (containerHeight * 0.35) + 10)
                             .padding(.leading, (containerHeight * 0.15) + 20)
                             .padding(.trailing, 10)
                         }
