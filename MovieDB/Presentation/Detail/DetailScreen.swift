@@ -107,7 +107,6 @@ struct DetailScreen: View {
                             .foregroundColor(.gray)
                             .padding(.horizontal, 15)
                             .padding(.top, 10)
-                            .matchedGeometryEffect(id: "overview \(movie.id)", in: namespaceId, properties: .position)
                         
                         Text(AppText.casts.localized())
                             .font(.system(size: 16).bold())

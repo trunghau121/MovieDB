@@ -21,4 +21,8 @@ extension View {
     func applyPaddingStatusBar() -> some View {
         self.padding(.top, AppContainer.getStatusBarHeight())
     }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

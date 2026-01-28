@@ -30,6 +30,7 @@ struct SearchScreen: View {
                                         .onTapGesture {
                                             if movie.id > 0 {
                                                 withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
+                                                    hideKeyboard()
                                                     self.movie = movie
                                                 }
                                             }
@@ -55,12 +56,12 @@ struct SearchScreen: View {
             }
             .applyPaddingStatusBar()
             .background(Color.backgroundApp)
-            .ignoresSafeArea()
             
             if movie != nil {
                 DetailScreen(movie: $movie, namespaceId: namespaceId)
             }
         }
+        .ignoresSafeArea()
     }
 }
 

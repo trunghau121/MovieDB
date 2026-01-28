@@ -25,6 +25,13 @@
 	<string>$(PHOTO_200_URL)</string>
 	<key>PHOTO_500_URL</key>
 	<string>$(PHOTO_500_URL)</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>background_app</string>
+		<key>UIImageName</key>
+		<string>horizontal_logo</string>
+	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

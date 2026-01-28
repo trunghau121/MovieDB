@@ -20,7 +20,7 @@ struct DetailHeader: View {
             } label: {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.white)
-                    .font(.title2)
+                    .font(.system(size: 25))
                     .shadow(radius: 7, x: 7, y: 7)
                     .padding(5)
             }
@@ -30,7 +30,7 @@ struct DetailHeader: View {
             } label: {
                 Image(systemName: "heart.fill")
                     .foregroundColor(isFavorius ? .red : .white)
-                    .font(.title2)
+                    .font(.system(size: 25))
                     .shadow(radius: 7, x: 7, y: 7)
                     .padding(5)
             }

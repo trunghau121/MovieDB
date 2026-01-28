@@ -35,7 +35,6 @@ struct ItemSearch: View {
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .matchedGeometryEffect(id: "overview \(movie.id)", in: namespaceId, properties: .position)
             }
             .padding(.vertical, 5)
         }

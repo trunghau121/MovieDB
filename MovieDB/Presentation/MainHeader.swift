@@ -58,7 +58,7 @@ struct MainHeader: View {
             } label: {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(getColor())
-                    .font(.title2)
+                    .font(.system(size: 23))
                     .shadow(radius: 5, x: 5, y: 5)
             }
         }
