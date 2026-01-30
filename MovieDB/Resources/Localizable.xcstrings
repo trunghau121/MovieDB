@@ -309,6 +309,9 @@
         }
       }
     },
+    "Screenshots" : {
+
+    },
     "setting_menu" : {
       "extractionState" : "manual",
       "localizations" : {

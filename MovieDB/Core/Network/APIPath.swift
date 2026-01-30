@@ -16,6 +16,7 @@ public enum APIPath {
     case Search
     case CastCrew(movieId: Int)
     case TrailerVideos(movieId: Int)
+    case Photos(movieId: Int)
     
     func fullPath() -> String {
         var path: String = ""
@@ -36,6 +37,8 @@ public enum APIPath {
             path = "movie/\(movieId)/credits"
         case .TrailerVideos(let movieId):
             path = "movie/\(movieId)/videos"
+        case .Photos(let movieId):
+            path = "movie/\(movieId)/images"
         }
         
         return Enviroment.baseUrl + path

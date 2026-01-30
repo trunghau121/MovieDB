@@ -40,16 +40,10 @@ struct SearchScreen: View {
                         }
                     },
                     empty: {
-                        ZStack {
-                            AppEmptyView()
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
+                        AppEmptyView()
                     },
                     error: { error in
-                        ZStack {
-                            ErrorView(message: error.getErrorMessage())
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.20)
+                        ErrorView(message: error.getErrorMessage())
                     }
                 )
                 .frame(maxHeight: .infinity)

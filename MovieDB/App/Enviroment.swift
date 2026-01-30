@@ -13,6 +13,7 @@ public enum Enviroment {
         case apiKey = "API_KEY"
         case photo500Url = "PHOTO_500_URL"
         case photo200Url = "PHOTO_200_URL"
+        case photo780Url = "PHOTO_780_URL"
     }
     
     private static let infoDictionary: [String: Any] = {
@@ -33,6 +34,7 @@ public enum Enviroment {
     static let apiKey: String = Enviroment.value(for: .apiKey)
     static let photo500Url: String = Enviroment.value(for: .photo500Url)
     static let photo200Url: String = Enviroment.value(for: .photo200Url)
+    static let photo780Url: String = Enviroment.value(for: .photo780Url)
     
 }
 

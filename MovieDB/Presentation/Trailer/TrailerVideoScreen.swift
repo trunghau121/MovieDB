@@ -62,17 +62,9 @@ struct TrailerVideoScreen: View {
                     .padding(.bottom, 20)
                 }
             } empty: {
-                ZStack {
-                    AppEmptyView()
-                }
-                .background(Color.red)
-                .clipShape(RoundedCornersShape(radius: 15))
+                AppEmptyView()
             } error: { error in
-                ZStack {
-                    ErrorView(message: error.getErrorMessage())
-                }
-                .background(Color.red)
-                .clipShape(RoundedCornersShape(radius: 15))
+                ErrorView(message: error.getErrorMessage())
             }
         }
         .background(Color.backgroundApp)

@@ -90,23 +90,40 @@ struct DetailScreen: View {
                                     }
                                 }
                         } empty: {
-                            ZStack {
-                                AppEmptyView()
-                            }
-                            .background(Color.red)
-                            .clipShape(RoundedCornersShape(radius: 15))
+                            AppEmptyView()
                         } error: { error in
-                            ZStack {
-                                ErrorView(message: error.getErrorMessage())
-                            }
-                            .background(Color.red)
-                            .clipShape(RoundedCornersShape(radius: 15))
+                            ErrorView(message: error.getErrorMessage())
                         }
                         
                         ExpandableText(movie.overview, lineLimit: 3, font: UIFont.systemFont(ofSize: 15))
                             .foregroundColor(.gray)
                             .padding(.horizontal, 15)
                             .padding(.top, 10)
+                        
+                        Button {
+                            if case .loaded(let photos) = viewModel.photoState {
+                                coordinator.show(MapRouter.photo(data: photos, photoSelected: photos[0]))
+                            }
+                        } label: {
+                            Text("Screenshots")
+                                .font(.system(size: 16).bold())
+                                .foregroundColor(Color.textApp)
+                                .padding(.horizontal, 15)
+                                .padding(.top, 10)
+                                .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                        }
+                        
+                        CollectionLoadingView(loadingState: viewModel.photoState) { photos in
+                            ScreenshotListView(data: photos) { photo in
+                                if case .loaded(let photos) = viewModel.photoState {
+                                    coordinator.show(MapRouter.photo(data: photos, photoSelected: photo))
+                                }
+                            }
+                        } empty: {
+                            AppEmptyView()
+                        } error: { error in
+                            ErrorView(message: error.getErrorMessage())
+                        }
                         
                         Text(AppText.casts.localized())
                             .font(.system(size: 16).bold())
@@ -118,24 +135,18 @@ struct DetailScreen: View {
                         CollectionLoadingView(loadingState: viewModel.castState) { casts in
                             CastListView(data: casts)
                         } empty: {
-                            ZStack {
-                                AppEmptyView()
-                            }
-                            .background(Color.red)
-                            .clipShape(RoundedCornersShape(radius: 15))
+                            AppEmptyView()
                         } error: { error in
-                            ZStack {
-                                ErrorView(message: error.getErrorMessage())
-                            }
-                            .background(Color.red)
-                            .clipShape(RoundedCornersShape(radius: 15))
+                            ErrorView(message: error.getErrorMessage())
                         }
+                        
                         Spacer()
                     }
                     .ignoresSafeArea()
                     .onAppear {
                         isFavorite = movieManager.isFavorite(movieId: movie.id)
                         viewModel.getMovieDetail(movieId: movie.id)
+                        viewModel.getPhotos(movieId: movie.id)
                         viewModel.getCastCrew(movieId: movie.id)
                     }
                     .statusBarHidden(true)

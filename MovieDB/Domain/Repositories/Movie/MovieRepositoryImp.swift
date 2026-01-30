@@ -77,4 +77,12 @@ public class MovieRepositoryImp: MovieRepository {
         let dtoResult: TrailerListDTO = try await apiClient.request(APIPath.TrailerVideos(movieId: movieId), query: query)
         return dtoResult.toDomain()
     }
+    
+    public func getPhotos(movieId: Int, language: String?) async throws -> PhotoList {
+        let query: [String: String?] = [
+            "language": language
+        ]
+        let dtoResult: PhotoListDTO = try await apiClient.request(APIPath.Photos(movieId: movieId), query: query)
+        return dtoResult.toDomain()
+    }
 }

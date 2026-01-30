@@ -15,6 +15,7 @@ API_KEY = 2472f33b26e67da5bb1456ffa226d78a
 // Photo URL
 PHOTO_500_URL = https:/$()/image.tmdb.org/t/p/w500
 PHOTO_200_URL = https:/$()/image.tmdb.org/t/p/w200
+PHOTO_780_URL = https:/$()/image.tmdb.org/t/p/w780
 
 // App Settings
 APP_NAME = MovieDB (STAGING)

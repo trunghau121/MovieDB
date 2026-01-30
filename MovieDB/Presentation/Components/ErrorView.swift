@@ -10,12 +10,15 @@ import SwiftUI
 struct ErrorView: View {
     var message: String
     var body: some View {
-        VStack(alignment: .center, spacing: 12) {
-            Spacer()
-            Image(systemName: "exclamationmark.triangle").font(.system(size: 48))
-            Text(message)
-            Spacer()
+        ZStack {
+            VStack(alignment: .center, spacing: 12) {
+                Spacer()
+                Image(systemName: "exclamationmark.triangle").font(.system(size: 48))
+                Text(message)
+                Spacer()
+            }
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

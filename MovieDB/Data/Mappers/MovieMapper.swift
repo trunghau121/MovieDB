@@ -10,7 +10,7 @@ extension MovieDTO {
         return Movie(
             id: self.id ?? -1,
             title: self.title ?? "",
-            backdropPath: "\(Enviroment.photo500Url + (self.backdropPath ?? "-1"))",
+            backdropPath: "\(Enviroment.photo780Url + (self.backdropPath ?? "-1"))",
             posterPath: "\(Enviroment.photo500Url + (self.posterPath ?? "-1"))",
             voteAverage: self.voteAverage ?? 0,
             releaseDate: self.releaseDate ?? "",
@@ -80,3 +80,36 @@ extension TrailerListDTO {
         }
     }
 }
+
+extension PhotoDTO {
+    func toDomain() -> Photo {
+        return Photo(
+            aspectRatio: self.aspectRatio ?? 0,
+            height: self.height ?? 0,
+            iso3166_1: self.iso3166_1 ?? "",
+            iso639_1: self.iso639_1 ?? "",
+            filePath: self.filePath ?? "-1",
+            voteAverage: self.voteAverage ?? 0,
+            voteCount: self.voteCount ?? 0,
+            width: self.width ?? 0
+        )
+    }
+}
+
+extension PhotoListDTO {
+    func toDomain() -> PhotoList {
+        return PhotoList(
+            id: self.id ?? 0,
+            backdrops: (self.backdrops ?? []).map {
+                $0.toDomain()
+            },
+            logos: (self.logos ?? []).map {
+                $0.toDomain()
+            },
+            posters: (self.posters ?? []).map {
+                $0.toDomain()
+            }
+        )
+    }
+}
+

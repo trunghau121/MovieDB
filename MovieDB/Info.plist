@@ -23,6 +23,8 @@
 	</dict>
 	<key>PHOTO_200_URL</key>
 	<string>$(PHOTO_200_URL)</string>
+	<key>PHOTO_780_URL</key>
+	<string>$(PHOTO_780_URL)</string>
 	<key>PHOTO_500_URL</key>
 	<string>$(PHOTO_500_URL)</string>
 	<key>UILaunchScreen</key>

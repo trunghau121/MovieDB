@@ -51,19 +51,9 @@ struct HomeScreen: View {
                         }
                     }
                 } empty: {
-                    ZStack {
-                        AppEmptyView()
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
-                    .background(Color.red)
-                    .clipShape(RoundedCornersShape(radius: 15))
+                    AppEmptyView()
                 } error: { error in
-                    ZStack {
-                        ErrorView(message: error.getErrorMessage())
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: containerHeight *  0.40)
-                    .background(Color.red)
-                    .clipShape(RoundedCornersShape(radius: 15))
+                    ErrorView(message: error.getErrorMessage())
                 }
                 .onAppear {
                     viewModel.loadTrending()

@@ -12,18 +12,20 @@ import Foundation
 class DetailViewModel: BaseViewModel {
     @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: Movie.placeholder.first!)
     @Published var castState: CollectionLoadingState<[Cast]> = .loading(placeholder: Cast.placeholder)
+    @Published var photoState: CollectionLoadingState<[Photo]> = .loading(placeholder: Photo.placeholder)
     private let repository = MovieRepositoryImp()
     private var detailUseCase: DetailUseCase
     private var castUseCase: CastUseCase
-    private var task: Task<Void, Never>? = nil
+    private var photoUseCase: PhotoUseCase
     
     override init() {
         self.detailUseCase = DetailUseCase(repository: repository)
         self.castUseCase = CastUseCase(repository: repository)
+        self.photoUseCase = PhotoUseCase(repository: repository)
     }
     
     func getMovieDetail(movieId: Int) {
-        task = performAsyn(
+        performAsyn(
             operation: {
                 try await self.detailUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
             },
@@ -46,7 +48,7 @@ class DetailViewModel: BaseViewModel {
     }
     
     func getCastCrew(movieId: Int) {
-        task = performAsyn(
+        performAsyn(
             operation: {
                 try await self.castUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
             },
@@ -68,8 +70,26 @@ class DetailViewModel: BaseViewModel {
         )
     }
     
-    deinit {
-        task?.cancel()
+    func getPhotos(movieId: Int) {
+        performAsyn(
+            operation: {
+                try await self.photoUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
+            },
+            onLoading: { loading in
+                if loading {
+                    self.photoState = .loading(placeholder: Photo.placeholder)
+                }
+            },
+            onSuccess: { result in
+                if result.backdrops.isEmpty {
+                    self.photoState = .empty
+                } else {
+                    self.photoState = .loaded(content: result.backdrops)
+                }
+            },
+            onError: { error in
+                self.photoState = .error(error)
+            }
+        )
     }
-    
 }
