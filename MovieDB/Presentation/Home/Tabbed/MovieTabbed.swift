@@ -15,7 +15,7 @@ struct MovieTabbed: View {
     var body: some View {
         WithTabBar { selection in
             CollectionLoadingView(loadingState: viewModel.movieTabState) { movies in
-                MovieTabView(namespaceId: namespaceId, movies: movies, moveToDetail: moveToDetail)
+                MovieTabView(namespaceId: namespaceId, movies: movies, textColor: .textApp, moveToDetail: moveToDetail)
             } empty: {
                 AppEmptyView()
             } error: { error in

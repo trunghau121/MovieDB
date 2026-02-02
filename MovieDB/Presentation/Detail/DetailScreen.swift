@@ -133,7 +133,11 @@ struct DetailScreen: View {
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                         
                         CollectionLoadingView(loadingState: viewModel.castState) { casts in
-                            CastListView(data: casts)
+                            CastListView(data: casts) { cast in
+                                if case .loaded(_) = viewModel.castState {
+                                    coordinator.show(MapRouter.cast(data: cast))
+                                }
+                            }
                         } empty: {
                             AppEmptyView()
                         } error: { error in

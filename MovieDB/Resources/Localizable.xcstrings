@@ -224,6 +224,23 @@
         }
       }
     },
+    "movies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movies"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danh sách phim"
+          }
+        }
+      }
+    },
     "no_data_movie" : {
       "extractionState" : "manual",
       "localizations" : {

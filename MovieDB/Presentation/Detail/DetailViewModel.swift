@@ -10,9 +10,11 @@ import Foundation
 
 @MainActor
 class DetailViewModel: BaseViewModel {
-    @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: Movie.placeholder.first!)
+    @Published var state: CollectionLoadingState<Movie> = .loading(placeholder: Movie.placeholder[0])
     @Published var castState: CollectionLoadingState<[Cast]> = .loading(placeholder: Cast.placeholder)
     @Published var photoState: CollectionLoadingState<[Photo]> = .loading(placeholder: Photo.placeholder)
+    @Published var castDetailState: CollectionLoadingState<Cast> = .loading(placeholder: Cast.placeholder[0])
+    @Published var castMovieListState: CollectionLoadingState<[Movie]> = .loading(placeholder: Movie.placeholder)
     private let repository = MovieRepositoryImp()
     private var detailUseCase: DetailUseCase
     private var castUseCase: CastUseCase
@@ -50,7 +52,7 @@ class DetailViewModel: BaseViewModel {
     func getCastCrew(movieId: Int) {
         performAsyn(
             operation: {
-                try await self.castUseCase.execute(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
+                try await self.castUseCase.getCastCrew(movieId: movieId, language: LocalizableManager.shared.currentLanguage.rawValue)
             },
             onLoading: { loading in
                 if loading {
@@ -89,6 +91,48 @@ class DetailViewModel: BaseViewModel {
             },
             onError: { error in
                 self.photoState = .error(error)
+            }
+        )
+    }
+    
+    func getCastDetail(personId: Int) {
+        performAsyn(
+            operation: {
+                try await self.castUseCase.getCastDetail(personId: personId, language: LocalizableManager.shared.currentLanguage.rawValue)
+            },
+            onLoading: { loading in
+                if loading {
+                    self.castDetailState = .loading(placeholder: Cast.placeholder[0])
+                }
+            },
+            onSuccess: { result in
+                self.castDetailState = .loaded(content: result)
+            },
+            onError: { error in
+                self.castDetailState = .error(error)
+            }
+        )
+    }
+    
+    func getCastMovies(personId: Int) {
+        performAsyn(
+            operation: {
+                try await self.castUseCase.getCastMovies(personId: personId, language: LocalizableManager.shared.currentLanguage.rawValue)
+            },
+            onLoading: { loading in
+                if loading {
+                    self.castMovieListState = .loading(placeholder: Movie.placeholder)
+                }
+            },
+            onSuccess: { result in
+                if result.isEmpty {
+                    self.castMovieListState = .empty
+                } else {
+                    self.castMovieListState = .loaded(content: result)
+                }
+            },
+            onError: { error in
+                self.castMovieListState = .error(error)
             }
         )
     }

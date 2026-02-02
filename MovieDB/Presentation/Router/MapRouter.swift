@@ -12,6 +12,7 @@ public enum MapRouter: NavigationRouter {
     case search
     case trailer(movie: Movie)
     case photo(data: [Photo], photoSelected: Photo)
+    case cast(data: Cast)
     
     public var transition: NavigationTranisitionStyle {
             switch self {
@@ -22,6 +23,8 @@ public enum MapRouter: NavigationRouter {
             case .trailer(_):
                 return .presentModally
             case .photo(_, _):
+                return .presentModally
+            case .cast(_):
                 return .presentModally
             }
         }
@@ -37,6 +40,8 @@ public enum MapRouter: NavigationRouter {
             TrailerVideoScreen(movie: movie)
         case .photo(let data, let photoSelected):
             PhotoDetailScreen(data: data, photoSelected: photoSelected)
+        case .cast(let cast):
+            CastDetailScreen(cast: cast)
         }
     }
 }

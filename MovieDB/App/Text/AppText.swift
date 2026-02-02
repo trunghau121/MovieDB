@@ -49,5 +49,6 @@ public struct AppText {
     static let readMore = "read_more"
     static let readLess = "read_less"
     static let casts = "casts"
+    static let movies = "movies"
     // End
 }

@@ -14,12 +14,17 @@ struct CastListView: View {
     ]
     
     let data: [Cast]
+    var castSelected: (Cast) -> ()
     var body: some View {
         VStack(alignment: .leading) {
             ScrollView(.horizontal) {
                 LazyHGrid(rows: rows, spacing: 20) {
                     ForEach(self.data, id: \.id) { cast in
-                        CastCrewItem(data: cast)
+                        Button {
+                            castSelected(cast)
+                        } label: {
+                            CastCrewItem(data: cast)
+                        }
                     }
                 }
                 .padding(.top, 5)
@@ -33,7 +38,9 @@ struct CastListView: View {
 struct CastListView_Previews: PreviewProvider {
     struct ContainerView: View {
         var body: some View {
-            CastListView(data: Cast.placeholder)
+            CastListView(data: Cast.placeholder) { cast in
+                
+            }
         }
     }
     

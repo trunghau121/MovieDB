@@ -10,6 +10,7 @@ import SwiftUI
 struct MovieTabView: View {
     var namespaceId: Namespace.ID
     var movies: [Movie]
+    var textColor: Color
     var moveToDetail: ((Movie) -> Void)
     
     var body: some View {
@@ -21,7 +22,7 @@ struct MovieTabView: View {
                             Button {
                                 moveToDetail(movie)
                             } label: {
-                                MovieItem(namespaceId: namespaceId, movie: movie, height: proxy.size.height)
+                                MovieItem(namespaceId: namespaceId, movie: movie, height: proxy.size.height, textColor: textColor)
                             }
                         }
                     }
@@ -36,7 +37,7 @@ struct MovieTabView_Previews: PreviewProvider {
     struct ContainerView: View {
         @Namespace var namespaceId
         var body: some View {
-            MovieTabView(namespaceId: namespaceId, movies: Movie.placeholder) { movieId in
+            MovieTabView(namespaceId: namespaceId, movies: Movie.placeholder, textColor: .textApp) { movieId in
                 
             }
         }

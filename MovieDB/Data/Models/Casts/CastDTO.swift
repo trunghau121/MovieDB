@@ -20,6 +20,10 @@ public struct CastDTO: Codable {
     var originalName: String?
     var popularity: Double?
     var profilePath: String?
+    var biography: String?
+    var homepage: String?
+    var placeOfBirth: String?
+    var birthday: String?
     
     enum CodingKeys: String, CodingKey {
         case adult = "adult"
@@ -34,5 +38,9 @@ public struct CastDTO: Codable {
         case originalName = "original_name"
         case popularity = "popularity"
         case profilePath = "profile_path"
+        case biography
+        case homepage
+        case placeOfBirth = "place_of_birth"
+        case birthday
     }
 }

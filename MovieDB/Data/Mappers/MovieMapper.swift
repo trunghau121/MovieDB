@@ -43,7 +43,11 @@ extension CastDTO {
             order: self.order ?? 0,
             originalName: self.originalName ?? "",
             popularity: self.popularity ?? 0,
-            profilePath: "\(Enviroment.photo200Url + (self.profilePath ?? ""))"
+            profilePath: "\(Enviroment.photo780Url + (self.profilePath ?? ""))",
+            biography: self.biography ?? "",
+            homepage: self.homepage ?? "",
+            placeOfBirth: self.placeOfBirth ?? "",
+            birthday: self.birthday ?? ""
         )
     }
 }
@@ -110,6 +114,14 @@ extension PhotoListDTO {
                 $0.toDomain()
             }
         )
+    }
+}
+
+extension CastMovieListDTO {
+    func toDomain() -> [Movie] {
+        (cast ?? []).map {
+            $0.toDomain()
+        }
     }
 }
 

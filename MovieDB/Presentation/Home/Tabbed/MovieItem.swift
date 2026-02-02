@@ -13,6 +13,7 @@ struct MovieItem: View {
     var namespaceId: Namespace.ID
     var movie: Movie
     var height: CGFloat
+    var textColor: Color
     
     var body: some View {
         VStack(spacing: 10) {
@@ -26,7 +27,7 @@ struct MovieItem: View {
             Text(movie.title)
                 .font(.system(size: 14, weight: .semibold))
                 .lineLimit(1)
-                .foregroundColor(.textApp)
+                .foregroundColor(textColor)
                 .padding(.bottom, 20)
                 .background(
                     GeometryReader { proxy in
@@ -46,7 +47,7 @@ struct MovieItem_Previews: PreviewProvider {
     struct ContainerView: View {
         @Namespace var namespaceId
         var body: some View {
-            MovieItem(namespaceId: namespaceId, movie: Movie.placeholder[0], height: 300)
+            MovieItem(namespaceId: namespaceId, movie: Movie.placeholder[0], height: 300, textColor: .textApp)
         }
     }
     
